@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Colección de Juegos Clásicos</title>
+</head>
+<body>
+    <header>
+        <h1>Colección de Juegos Clásicos</h1>
+        <p>Juegos de toda la vida pero en Java</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#juegos">Juegos</a></li>
+            <li><a href="#estadisticas">Estadísticas</a></li>
+            <li><a href="#acerca">Acerca de</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="intro" id="inicio">
+            <h2>Bienvenido</h2>
+            <p>Esta es una colección de juegos clásicos implementados en Java. Cada juego ha sido desarrollado con el objetivo de practicar conceptos de programación orientada a objetos, estructuras de datos y lógica de control. Evidentemente bajo el contexto del mini reto de la primera evaluación</p>
+        </section>
+
+        <section class="games-section" id="juegos">
+            <h2>Juegos Disponibles</h2>
+            
+            <div class="games-grid">
+                <div class="game-card">
+                    <div class="game-header">
+                        <div class="game-icon">🎯</div>
+                        <h3>Ahorcado</h3>
+                    </div>
+                    <div class="game-content">
+                        <p>El clásico juego del ahorcado. Adivina la palabra oculta letra por letra antes de quedarte sin vidas Incluye un diccionario de más de 370 palabras en español, contenidas en un array unidimensional.</p>
+                        <div class="game-details">
+                            <div class="detail-item">
+                                <strong>Jugadores:</strong> 1
+                            </div>
+                            <div class="detail-item">
+                                <strong>Dificultad:</strong> Fácil - Media
+                            </div>
+                            <div class="detail-item">
+                                <strong>Duración:</strong> 3-5 minutos
+                            </div>
+                            <div class="detail-item">
+                                <strong>Implementación:</strong> Ahorcado.java
+                            </div>
+                        </div>
+                        <a href="vercodigo.html" class="play-button">Ver Código</a>
+                    </div>
+                </div>
+
+                <div class="game-card">
+                    <div class="game-header">
+                        <div class="game-icon">🔴</div>
+                        <h3>Cuatro en Raya</h3>
+                    </div>
+                    <div class="game-content">
+                        <p>Conecta cuatro fichas del mismo color en línea vertical, horizontal o diagonal. Tablero de 6 filas por 7 columnas con detección automática de victoria.</p>
+                        <div class="game-details">
+                            <div class="detail-item">
+                                <strong>Jugadores:</strong> 2
+                            </div>
+                            <div class="detail-item">
+                                <strong>Dificultad:</strong> Fácil - Media
+                            </div>
+                            <div class="detail-item">
+                                <strong>Duración:</strong> 5-10 minutos
+                            </div>
+                            <div class="detail-item">
+                                <strong>Implementación:</strong> cuatro.java
+                            </div>
+                        </div>
+                        <a href="vercodigo.html" class="play-button">Ver Código</a>
+                    </div>
+                </div>
+
+                <div class="game-card coming-soon">
+                    <div class="game-header">
+                        <div class="game-icon">❓</div>
+                        <h3>Próximamente</h3>
+                    </div>
+                    <div class="game-content">
+                        <p>Un nuevo juego clásico estará disponible pronto. Mantente atento a las actualizaciones.</p>
+                        <div class="game-details">
+                            <div class="detail-item">
+                                <strong>Jugadores:</strong> -
+                            </div>
+                            <div class="detail-item">
+                                <strong>Dificultad:</strong> -
+                            </div>
+                            <div class="detail-item">
+                                <strong>Duración:</strong> -
+                            </div>
+                            <div class="detail-item">
+                                <strong>Implementación:</strong> En desarrollo
+                            </div>
+                        </div>
+                        <a href="vercodigo.html" class="play-button">En desarrollo</a>
+                    </div>
+                </div>
+
+                <div class="game-card coming-soon">
+                    <div class="game-header">
+                        <div class="game-icon">❓</div>
+                        <h3>Próximamente</h3>
+                    </div>
+                    <div class="game-content">
+                        <p>Un nuevo juego clásico estará disponible pronto. Mantente atento a las actualizaciones.</p>
+                        <div class="game-details">
+                            <div class="detail-item">
+                                <strong>Jugadores:</strong> -
+                            </div>
+                            <div class="detail-item">
+                                <strong>Dificultad:</strong> -
+                            </div>
+                            <div class="detail-item">
+                                <strong>Duración:</strong> -
+                            </div>
+                            <div class="detail-item">
+                                <strong>Implementación:</strong> En desarrollo
+                            </div>
+                        </div>
+                        <a href="#" class="play-button">En desarrollo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-section" id="estadisticas">
+            <h2>Estadísticas del Proyecto</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">4</span>
+                    <span class="stat-label">Juegos Planeados</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">2</span>
+                    <span class="stat-label">Juegos Completos</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">370+</span>
+                    <span class="stat-label">Palabras en Ahorcado</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">42</span>
+                    <span class="stat-label">Casillas en 4 en Raya</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="acerca">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Sobre el Proyecto</h3>
+                <p>Colección de juegos clásicos desarrollados como entrega del mini reto utilizando conceptos de POO</p>
+            </div>
+            <div class="footer-section">
+                <h3>Juegos</h3>
+                <a href="#juegos">Ahorcado</a>
+                <a href="#juegos">Cuatro en Raya</a>
+                <a href="#juegos">Próximamente: Juego 3</a>
+                <a href="#juegos">Próximamente: Juego 4</a>
+            </div>
+            <div class="footer-section">
+                <h3>Tecnologías</h3>
+                <p>Java (MAVEN)</p>
+                <p>POO (Programación Orientada a Objetos)</p>
+                <p>Estructuras de Datos</p>
+                <p>Lógica de Control</p>
+                <p>SQL (MySQL)</p>
+            </div>
+            <div class="footer-section">
+                <h3>Equipo</h3>
+                <p>Equipo 3</p>
+                <p>Paquete: es.equipo3</p>
+                <p>Torrelavega, CAntabria, ES</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Equipo 3 - Colección de Juegos Clásicos. Proyecto Educativo.</p>
+        </div>
+    </footer>
+</body>
+</html>
