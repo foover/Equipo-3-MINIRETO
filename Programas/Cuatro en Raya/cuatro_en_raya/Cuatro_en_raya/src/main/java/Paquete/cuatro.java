@@ -34,8 +34,6 @@ import java.util.Scanner;
  * @author daw121
  */
 public class cuatro {
-//    private int[] filas= new int [6];
-//    private int[] columnas= new int [7];
 
     private char[][] tabla;
     
@@ -44,6 +42,9 @@ public class cuatro {
     private final char vacio = '.';
     private boolean turno;
 
+    
+    
+    // SE CONSTRUYE UNA TABLA CON LOS PUNTOS
     public void tabla2() {
         for (int i = 0; i < tabla.length; i++) {
             for (int j = 0; j < tabla[i].length; j++) {
@@ -52,6 +53,9 @@ public class cuatro {
         }
     }
     
+    
+    
+    // ES EL CONSTRUCTOR POR DEFECTO
     public cuatro() {
         this.turno = true;
         this.tabla = new char[6][7];
@@ -59,7 +63,13 @@ public class cuatro {
     }
     
     
-    
+    // MUESTRA LA TABLA/MATRIZ, MOSTRARIA ALGO ASI:
+    //. . . . . . . 
+    //. . . . . . . 
+    //. . . . . . . 
+    //. . . . . . . 
+    //. . . . . . . 
+    //. . . . . . . 
     public void mostrarTabla(){
         for (int i = 0; i < this.tabla.length; i++) {
             for (int j = 0; j < this.tabla[i].length; j++) {
@@ -80,72 +90,171 @@ public class cuatro {
     }
     
     
-    
+    // CAMBIA DE TURNO, PUEDE CAMBIAR DE TURNO GRACIAS A UN BOOLEAN 
+    // EL BOOLEAN PASA DE TRUE A FALSE Y ASI LOS TURNOS VAN ALTERNANDO. EN EL CONSTRUCTOR AL TURNO SE LE DA EL VALOR TRUE
     public void cambioTurno(){
         this.turno = !this.turno;
     }
     
     
-//    public void insertarEn(int columna){
-//        if (turno){
-//            tabla[columna] = j1;
-//        }else{
-//            tabla[columna] = j2;
-//        }
-//    }
+    // SE INSERTA EL SIMBOLO EN LA TABLA "X u O"
+    public void insertarEn(int columna){
+        
+        for(int i = tabla.length - 1; i >= 0 ; i--) {
+            
+            if(tabla[i][columna] == vacio){
+                if (turno){
+                tabla[i][columna] = j1;
+                }else{
+                tabla[i][columna] = j2;
+                }  
+                return;
+            }
+        }
+    }
 
     
-    public void buscar(int tabla[][]){
-        boolean econtrado = false;
-        
-        for (int i = 0; i < tabla.length; i++) {
-            for (int j = 0; j < tabla.length; j++) {
-                System.out.print(" 0");
-                if (econtrado = true) {
-                    System.out.print(" 1");
-                }else{
-                    System.out.println("La casilla esta ocupada");
-                }
-            }
-            System.out.println("  ");
-        }
-        
-        
-    }
     
-//    public void jugadores(Scanner entrada){
-//        boolean win = false;
-//        boolean draw = false;
+//    // SE BUSCA/COMPRUEBA SI LA CASILLA ESTA OCUPADA, SI LO ESTA TE SALE UN MENSAJE 
+//    public void buscar(char tabla[][]){
+//        boolean econtrado = false;
 //        
-//        
-//        // comprobar si la fila esta vacia
 //        for (int i = 0; i < tabla.length; i++) {
 //            for (int j = 0; j < tabla.length; j++) {
-//                if ()
-//            }
-//        }
-//        
-//        
-//        while (!win || !draw){
-//            
-//        }
-//    }
-
-//    public int[] buscarElemento(int[][] matriz, int elementoBuscado) {
-//        // Recorre cada fila
-//        for (int fila = 0; fila < matriz.length; fila++) {
-//            // Recorre cada columna dentro de la fila actual
-//            for (int col = 0; col < matriz[fila].length; col++) {
-//                // Compara el elemento de la matriz con el buscado
-//                if (matriz[fila][col] == elementoBuscado) {
-//                    // Si lo encuentra, devuelve sus coordenadas (fila, columna)
-//                    return new int[]{fila, col};
+//                System.out.print(" 0");
+//                if (econtrado = true) {
+//                    System.out.print(" 1");
+//                }else{
+//                    System.out.println("La casilla esta ocupada");
 //                }
 //            }
+//            System.out.println("  ");
 //        }
-//        // Si no se encuentra después de revisar todo, devuelve {-1, -1}
-//        return new int[]{-1, -1};
 //    }
-//    
-//    
+    
+    // SE VALIDA LA POSICION 
+    public boolean validarPos(int fila, int columna){
+        if (fila >= 0 && fila <= tabla.length && columna >= 0 && columna <= tabla.length){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    // indica si la tabla esta llena o no, esta llena si ya no aparece el simbolo que esta en la variable "vacio" ,osea '.'
+    public boolean tablaLlena(){
+        for (int i = 0; i < tabla.length; i++) {
+            for (int j = 0; j < tabla.length; j++) {
+                // comprobacion de casilla actul. Aunque sea una sola casilla con un punto, osea vacia, el juego sigue
+                if (tabla[i][j] == vacio){
+                    return false;
+                }
+            }
+        }
+        // devuelve verdader si la condicion de if de arriba es falso. Devuelve verdadero solo en el caso de que la tabla esta llena
+        return true;
+    }
+      
+    // COMPROBACION DE GANADOR EN LA COLUMNA 
+    private char columna(){
+        char simbolo;
+        boolean coincide;
+        
+        for (int i = 0; i < tabla.length; i++) {
+            coincide = true;
+            simbolo = tabla[0][i];
+            if (simbolo != vacio){
+                for (int j = 1; j < tabla[0].length; j++) {
+                    // si no coincide ya no habra ganador 
+                    if(simbolo != tabla[j][i]){
+                        coincide = false;
+                    }
+                }
+                // devuelve el simbolo del ganador si no se mete en el if de arriba
+                if(coincide){
+                    return simbolo;
+                }
+            }
+            
+        }
+        // en caso de que no hay ganador vuelve vacio
+        return vacio;
+    }
+    
+    
+    // COMPROBACION DE GANADOR EN LA fila 
+    private char fila(){
+        char simbolo;
+        boolean coincide;
+        
+        for (int i = 0; i < 6; i++) {
+            coincide = true;
+            simbolo = tabla[i][0];
+            if (simbolo != vacio){
+                for (int j = 1; j < 3; j++) {
+                    simbolo = tabla[i][j];
+                    // comprueba la fila 
+                    if (simbolo != vacio && simbolo == tabla[i][j+1] && simbolo == tabla[i][j+2] && simbolo == tabla[i][j+3]){
+                        // devuelve el simbolo del ganador
+                        return simbolo;
+                    }
+                    
+                }
+            }
+            
+        }
+        // en caso de que no hay ganador vuelve vacio
+        return vacio;
+    }
+    
+   
+    // COMPROBACION DE GANADOR EN LA DIAGONAL
+    private char diagonal(){
+        char simbolo;
+        //boolean coincide = true;
+        
+        //diagonal principal (izquierda a derecha)
+        // Esta tomando el valor de la esquina izquierda de abajo a esquina derecha de arriba...
+        // (\)
+        for (int i = 0 ; i <= 2; i++) {
+            for (int j = 0; j <= 3; j++) {
+                simbolo = tabla[i][j];
+                if(simbolo != vacio &&
+                        simbolo == tabla[i + 1][j + 1] &&
+                        simbolo == tabla[i + 2][j + 2] &&
+                        simbolo == tabla[i + 3][j + 3]){
+                    return simbolo;
+                }
+            }
+        }
+                // devuelve el simbolo del ganador si no se mete en el if de arriba   
+        
+        //diagonal inversa (derecha a izquierda)
+        // Esta tomando el valor de la esquina derecha de abajo a esquina izquierda de arriba...
+        // (/)
+        for (int i = 3 ; i <= 5; i++) {
+            for (int j = 0; j <= 3; j++) {
+                simbolo = tabla[i][j];
+                if(simbolo != vacio &&
+                        simbolo == tabla[i - 1][j + 1] &&
+                        simbolo == tabla[i - 2][j + 2] &&
+                        simbolo == tabla[i - 3][j + 3]){
+                    return simbolo;
+                }
+            }
+        }
+        
+        // en caso de que no hay ganador vuelve vacio
+        return vacio;
+    }
+    
+    public boolean finPartida(){
+        if (tablaLlena() || fila() != vacio || columna() != vacio || diagonal() != vacio){
+            return true;
+        }
+        return false;
+    }
+    
+    
+    
 }
