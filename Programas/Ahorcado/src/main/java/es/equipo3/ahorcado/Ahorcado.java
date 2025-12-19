@@ -46,8 +46,8 @@ public class Ahorcado {
         "mente", "pensamiento", "idea", "memoria", "sueno", "atencion", "concentracion", "logica", "razon", "decision"
     };
 
-    public void jugarAhorcado() { // Metodo principal del juego
-        Scanner in = new Scanner(System.in);
+    public void jugarAhorcado(Scanner in) { // Metodo principal del juego
+        // Scanner in = new Scanner(System.in);
         Random rand = new Random();
         
         String palabraElegida = palabras[rand.nextInt(palabras.length)]; // Selecciona una palabra aleatoria del array
@@ -98,7 +98,7 @@ public class Ahorcado {
             }
      } 
         
-        in.close();
+       
     }
     
     private String mostrarPalabra(char[] palabra) { // Metodo para mostrar la palabra actual con espacios entre letras
