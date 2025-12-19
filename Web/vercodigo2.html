@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Código - Ahorcado</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background: #1a1a1a;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            color: #e0e0e0;
+            padding: 2.5rem 0;
+            border-bottom: 2px solid #333;
+        }
+
+        header h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        header p {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #999;
+        }
+
+        nav {
+            background: #252525;
+            padding: 1rem 0;
+            border-bottom: 1px solid #333;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #999;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .code-header {
+            background: #252525;
+            padding: 2rem;
+            border-radius: 8px 8px 0 0;
+            border: 1px solid #333;
+            border-bottom: none;
+        }
+
+        .code-header h2 {
+            color: #ffffff;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .code-header p {
+            color: #999;
+        }
+
+        .code-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .tab {
+            background: #2c2c2c;
+            color: #999;
+            padding: 0.7rem 1.5rem;
+            border-radius: 4px 4px 0 0;
+            border: 1px solid #333;
+            border-bottom: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab:hover {
+            color: #ffffff;
+            background: #333;
+        }
+
+        .tab.active {
+            background: #1e1e1e;
+            color: #ffffff;
+            border-color: #444;
+        }
+
+        .code-container {
+            background: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 0 0 8px 8px;
+            overflow: hidden;
+        }
+
+        .code-toolbar {
+            background: #252525;
+            padding: 0.8rem 1.5rem;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .file-name {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .copy-button {
+            background: #2c2c2c;
+            color: #ffffff;
+            padding: 0.4rem 1rem;
+            border: 1px solid #444;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .copy-button:hover {
+            background: #333;
+            border-color: #555;
+        }
+
+        .code-content {
+            padding: 1.5rem;
+            overflow-x: auto;
+        }
+
+        pre {
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        code {
+            color: #e0e0e0;
+        }
+
+        /* Syntax highlighting para Java */
+        .keyword {
+            color: #569cd6;
+            font-weight: bold;
+        }
+
+        .class-name {
+            color: #4ec9b0;
+        }
+
+        .string {
+            color: #ce9178;
+        }
+
+        .comment {
+            color: #6a9955;
+            font-style: italic;
+        }
+
+        .method {
+            color: #dcdcaa;
+        }
+
+        .number {
+            color: #b5cea8;
+        }
+
+        .annotation {
+            color: #9cdcfe;
+        }
+
+        .line-number {
+            color: #858585;
+            margin-right: 1.5rem;
+            user-select: none;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: #2c2c2c;
+            color: #ffffff;
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border: 1px solid #444;
+            margin-bottom: 2rem;
+        }
+
+        .back-button:hover {
+            background: #333;
+            border-color: #555;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: #999;
+            padding: 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid #333;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .code-toolbar {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+
+            .code-tabs {
+                flex-wrap: wrap;
+            }
+
+            pre {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Código del Juego</h1>
+        <p>Visualización del código fuente</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="#codigo">Código</a></li>
+            <li><a href="index.html#juegos">Juegos</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <a href="index.html" class="back-button">← Volver a Juegos</a>
+
+        <div class="code-header">
+            <h2>🎯 Ahorcado</h2>
+            <p>Implementación del clásico juego del ahorcado en Java</p>
+            
+            <div class="code-tabs">
+                <div class="tab active">Main.java</div>
+                <div class="tab">Ahorcado.java</div>
+            </div>
+        </div>
+
+        <div class="code-container">
+            <div class="code-toolbar">
+                <span class="file-name">📄 Main.java</span>
+                <button class="copy-button">Copiar código</button>
+            </div>
+            
+            <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #080; font-weight: bold">package</span><span style="color: #BBB"> </span><span style="color: #0E84B5; font-weight: bold">es.equipo3.ahorcado.test</span>;
+
+<span style="color: #080; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #0E84B5; font-weight: bold">java.util.Random</span>;
+<span style="color: #080; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #0E84B5; font-weight: bold">java.util.Scanner</span>;
+
+<span style="color: #080; font-weight: bold">public</span><span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">class</span> <span style="color: #B06; font-weight: bold">MainTest</span><span style="color: #BBB"> </span>{
+
+<span style="color: #BBB">    </span><span style="color: #080; font-weight: bold">private</span><span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">final</span><span style="color: #BBB"> </span>String<span style="color: #333">[]</span><span style="color: #BBB"> </span>palabras<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span>{<span style="color: #BBB"> </span><span style="color: #888">// Cambiar este array a otra clase para mayor limpieza</span>
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;casa&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;perro&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;gato&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;mesa&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;silla&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;libro&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;lapiz&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;papel&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;flor&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;arbol&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;coche&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;rueda&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;puerta&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;ventana&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;techo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;pared&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;suelo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;camino&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;rio&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;mar&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;playa&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;arena&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;ola&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;nube&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;cielo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;lluvia&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;viento&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;fuego&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;tierra&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;piedra&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;montana&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;valle&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;bosque&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;hoja&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;rama&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;tronco&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;raiz&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;semilla&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;fruto&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;campo&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;ciudad&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;pueblo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;barrio&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;calle&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;plaza&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;puente&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;torre&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;castillo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;iglesia&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;escuela&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;clase&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;alumno&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;profesor&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;examen&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;nota&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;libreta&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;mochila&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;ordenador&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;teclado&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;raton&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;pantalla&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;telefono&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;mensaje&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;correo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;internet&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;codigo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;programa&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;variable&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;bucle&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;condicion&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;funcion&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;clasejava&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;metodo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;objeto&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;array&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;lista&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;numero&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;cadena&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;booleano&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;entero&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;decimal&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;suma&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;resta&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;producto&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;division&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;resultado&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;error&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;debug&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;compilar&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;ejecutar&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;juego&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;nivel&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;puntos&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;vidas&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;tiempo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;record&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;pantalla&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;boton&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;menu&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;inicio&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;final&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;victoria&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;derrota&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;enemigo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;aliado&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;arma&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;escudo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;pocion&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;magia&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;energia&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;fuerza&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;velocidad&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;salto&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;correr&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;caminar&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;agachar&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;disparar&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;apuntar&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;esquivar&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;golpear&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;musica&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;sonido&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;ritmo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;melodia&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;guitarra&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;piano&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;bateria&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;violin&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;cancion&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;artista&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;pelicula&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;actor&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;directo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;escena&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;guion&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;camara&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;imagen&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;foto&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;video&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;edicion&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;color&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;rojo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;verde&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;azul&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;amarillo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;negro&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;blanco&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;gris&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;morado&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;naranja&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;comida&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;pan&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;queso&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;leche&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;agua&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;zumo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;carne&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;pasta&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;arroz&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;pizza&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;hamburguesa&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;ensalada&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;sopa&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;postre&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;chocolate&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;galleta&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;helado&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;fruta&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;manzana&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;platano&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;naranja&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;pera&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;melon&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;sandia&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;fresa&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;cereza&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;limon&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;uva&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;kiwi&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;mango&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;deporte&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;futbol&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;baloncesto&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;tenis&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;ciclismo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;natacion&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;atletismo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;boxeo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;gimnasia&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;rugby&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;carrera&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;entreno&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;equipo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;partido&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;liga&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;torneo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;clasificacion&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;victoria&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;empate&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;derrota&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;salud&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;medico&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;hospital&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;farmacia&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;pastilla&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;cura&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;herida&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;reposo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;energia&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;fuerza&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;familia&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;padre&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;madre&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;hermano&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;hermana&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;abuelo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;abuela&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;tio&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;tia&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;primo&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;amigo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;amiga&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;companero&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;vecino&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;persona&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;grupo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;equipo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;lider&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;miembro&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;sociedad&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;trabajo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;oficio&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;empleo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;empresa&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;negocio&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;jefe&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;cliente&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;reunion&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;horario&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;salario&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;dinero&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;moneda&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;precio&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;oferta&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;compra&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;venta&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;mercado&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;tienda&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;factura&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;ahorro&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;viaje&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;hotel&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;avion&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;tren&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;bus&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;taxi&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;maleta&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;billete&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;destino&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;mapa&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;pais&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;ciudad&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;capital&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;frontera&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;idioma&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;cultura&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;historia&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;tradicion&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;fiesta&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;evento&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;tiempo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;hora&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;minuto&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;segundo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;dia&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;noche&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;semana&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;mes&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;ano&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;calendario&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;clima&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;frio&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;calor&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;niebla&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;tormenta&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;granizo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;nieve&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;sol&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;sombra&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;temperatura&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;animal&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;caballo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;vaca&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;oveja&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;cerdo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;pollo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;pato&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;conejo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;raton&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;tigre&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;leon&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;elefante&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;jirafa&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;mono&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;oso&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;zorro&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;lobo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;aguila&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;halcon&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;pez&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;insecto&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;hormiga&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;abeja&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;mosca&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;mariposa&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;arana&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;grillo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;saltamontes&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;escarabajo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;libelula&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;vehiculo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;moto&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;camion&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;bicicleta&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;patinete&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;tractor&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;barco&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;submarino&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;helicoptero&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;avioneta&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;energia&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;solar&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;eolica&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;nuclear&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;electrica&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;bateria&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;motor&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;combustible&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;gasolina&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;diesel&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;ciencia&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;fisica&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;quimica&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;biologia&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;matematicas&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;geologia&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;astronomia&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;experimento&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;teoria&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;hipotesis&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;espacio&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;planeta&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;estrella&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;galaxia&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;universo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;orbita&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;cohete&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;satelite&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;astronauta&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;gravedad&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;emocion&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;alegria&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;tristeza&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;miedo&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;ira&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;amor&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;odio&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;sorpresa&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;calma&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;nervios&quot;</span>,
+<span style="color: #BBB">        </span><span style="background-color: #FFF0F0">&quot;mente&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;pensamiento&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;idea&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;memoria&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;sueno&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;atencion&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;concentracion&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;logica&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;razon&quot;</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;decision&quot;</span>
+<span style="color: #BBB">    </span>};
+
+<span style="color: #BBB">    </span><span style="color: #080; font-weight: bold">public</span><span style="color: #BBB"> </span><span style="color: #339; font-weight: bold">void</span><span style="color: #BBB"> </span><span style="color: #06B; font-weight: bold">jugarAhorcado</span>()<span style="color: #BBB"> </span>{<span style="color: #BBB"> </span><span style="color: #888">// Metodo principal del juego</span>
+<span style="color: #BBB">        </span>Scanner<span style="color: #BBB"> </span>in<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">new</span><span style="color: #BBB"> </span>Scanner(System.<span style="color: #00C">in</span>);
+<span style="color: #BBB">        </span>Random<span style="color: #BBB"> </span>rand<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">new</span><span style="color: #BBB"> </span>Random();
+<span style="color: #BBB">        </span>
+<span style="color: #BBB">        </span>String<span style="color: #BBB"> </span>palabraElegida<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span>palabras<span style="color: #333">[</span>rand.<span style="color: #00C">nextInt</span>(palabras.<span style="color: #00C">length</span>)<span style="color: #333">]</span>;<span style="color: #BBB"> </span><span style="color: #888">// Selecciona una palabra aleatoria del array</span>
+<span style="color: #BBB">        </span><span style="color: #339; font-weight: bold">char</span><span style="color: #333">[]</span><span style="color: #BBB"> </span>palabraActual<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">new</span><span style="color: #BBB"> </span><span style="color: #339; font-weight: bold">char</span><span style="color: #333">[</span>palabraElegida.<span style="color: #00C">length</span>()<span style="color: #333">]</span>;<span style="color: #BBB"> </span><span style="color: #888">// Crea un array con la misma longitud que la palabra elegida anteriormente</span>
+<span style="color: #BBB">        </span>
+<span style="color: #BBB">        </span><span style="color: #080; font-weight: bold">for</span><span style="color: #BBB"> </span>(<span style="color: #339; font-weight: bold">int</span><span style="color: #BBB"> </span>i<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span><span style="color: #00D; font-weight: bold">0</span>;<span style="color: #BBB"> </span>i<span style="color: #BBB"> </span><span style="color: #333">&lt;</span><span style="color: #BBB"> </span>palabraActual.<span style="color: #00C">length</span>;<span style="color: #BBB"> </span>i<span style="color: #333">++</span>)<span style="color: #BBB"> </span>{
+<span style="color: #BBB">            </span>palabraActual<span style="color: #333">[</span>i<span style="color: #333">]</span><span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span><span style="color: #04D">&#39;_&#39;</span>;<span style="color: #BBB"> </span><span style="color: #888">// Rellena el array con guiones bajos para representar las letras no adivinadas</span>
+<span style="color: #BBB">        </span>}
+<span style="color: #BBB">        </span>
+<span style="color: #BBB">        </span><span style="color: #339; font-weight: bold">int</span><span style="color: #BBB"> </span>vidas<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span><span style="color: #00D; font-weight: bold">6</span>;<span style="color: #BBB"> </span><span style="color: #888">// Cambiar esta funcion a corazones o algun otro simbolo para mayor estetica y colocar por encima del todo</span>
+<span style="color: #BBB">        </span>
+<span style="color: #BBB">        </span>System.<span style="color: #00C">out</span>.<span style="color: #00C">println</span>(<span style="background-color: #FFF0F0">&quot;JUEGO DEL AHORCADO&quot;</span>);
+<span style="color: #BBB">        </span>System.<span style="color: #00C">out</span>.<span style="color: #00C">println</span>(<span style="background-color: #FFF0F0">&quot;Tienes &quot;</span><span style="color: #BBB"> </span><span style="color: #333">+</span><span style="color: #BBB"> </span>vidas<span style="color: #BBB"> </span><span style="color: #333">+</span><span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot; vidas&quot;</span>);
+<span style="color: #BBB">        </span>
+<span style="color: #BBB">        </span><span style="color: #080; font-weight: bold">while</span><span style="color: #BBB"> </span>(vidas<span style="color: #BBB"> </span><span style="color: #333">&gt;</span><span style="color: #BBB"> </span><span style="color: #00D; font-weight: bold">0</span>)<span style="color: #BBB"> </span>{
+<span style="color: #BBB">            </span>System.<span style="color: #00C">out</span>.<span style="color: #00C">println</span>(<span style="background-color: #FFF0F0">&quot;\nPalabra: &quot;</span><span style="color: #BBB"> </span><span style="color: #333">+</span><span style="color: #BBB"> </span>mostrarPalabra(palabraActual));<span style="color: #BBB"> </span><span style="color: #888">// Muestra la palabra actual con las letras adivinadas y los guiones bajos usando el metodo mostrarPalabra (linea 104).</span>
+<span style="color: #BBB">            </span>System.<span style="color: #00C">out</span>.<span style="color: #00C">println</span>(<span style="background-color: #FFF0F0">&quot;Vidas: &quot;</span><span style="color: #BBB"> </span><span style="color: #333">+</span><span style="color: #BBB"> </span>vidas);
+<span style="color: #BBB">            </span>System.<span style="color: #00C">out</span>.<span style="color: #00C">print</span>(<span style="background-color: #FFF0F0">&quot;Introduce una letra: &quot;</span>);
+<span style="color: #BBB">            </span>
+<span style="color: #BBB">            </span><span style="color: #339; font-weight: bold">char</span><span style="color: #BBB"> </span>letra<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span>in.<span style="color: #00C">nextLine</span>().<span style="color: #00C">toLowerCase</span>().<span style="color: #00C">charAt</span>(<span style="color: #00D; font-weight: bold">0</span>);<span style="color: #BBB"> </span><span style="color: #888">// Lee la letra introducida por el usuario, se lee como un String y se convierte a char, para la           validacion se recoge el primer caracter de la cadena introducida.</span>
+<span style="color: #BBB">            </span><span style="color: #080; font-weight: bold">if</span>(Character.<span style="color: #00C">isLetter</span>(letra)){<span style="color: #BBB"> </span><span style="color: #888">// Validacion para asegurarse de que el usuario introduce una letra</span>
+<span style="color: #BBB">            </span><span style="color: #339; font-weight: bold">boolean</span><span style="color: #BBB"> </span>acierto<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">false</span>;<span style="color: #BBB"> </span><span style="color: #888">// Inicializa la variable acierto como false</span>
+<span style="color: #BBB">            </span><span style="color: #080; font-weight: bold">for</span><span style="color: #BBB"> </span>(<span style="color: #339; font-weight: bold">int</span><span style="color: #BBB"> </span>i<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span><span style="color: #00D; font-weight: bold">0</span>;<span style="color: #BBB"> </span>i<span style="color: #BBB"> </span><span style="color: #333">&lt;</span><span style="color: #BBB"> </span>palabraElegida.<span style="color: #00C">length</span>();<span style="color: #BBB"> </span>i<span style="color: #333">++</span>)<span style="color: #BBB"> </span>{<span style="color: #BBB"> </span><span style="color: #888">// Recorre la palabra elegida</span>
+<span style="color: #BBB">                </span><span style="color: #080; font-weight: bold">if</span><span style="color: #BBB"> </span>(palabraElegida.<span style="color: #00C">charAt</span>(i)<span style="color: #BBB"> </span><span style="color: #333">==</span><span style="color: #BBB"> </span>letra)<span style="color: #BBB"> </span>{<span style="color: #BBB"> </span><span style="color: #888">// Comprueba si la letra introducida coincide con alguna letra de la palabra</span>
+<span style="color: #BBB">                    </span>palabraActual<span style="color: #333">[</span>i<span style="color: #333">]</span><span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span>letra;
+<span style="color: #BBB">                    </span>acierto<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">true</span>;
+<span style="color: #BBB">                </span>}
+<span style="color: #BBB">            </span>}
+<span style="color: #BBB">            </span>
+<span style="color: #BBB">            </span><span style="color: #080; font-weight: bold">if</span><span style="color: #BBB"> </span>(acierto)<span style="color: #BBB"> </span>{
+<span style="color: #BBB">                </span>System.<span style="color: #00C">out</span>.<span style="color: #00C">println</span>(<span style="background-color: #FFF0F0">&quot;Correcto!&quot;</span>);<span style="color: #BBB"> </span><span style="color: #888">// Si la letra es correcta, no se resta vida</span>
+<span style="color: #BBB">            </span>}<span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">else</span><span style="color: #BBB"> </span>{
+<span style="color: #BBB">                </span>vidas<span style="color: #333">--</span>;
+<span style="color: #BBB">                </span>System.<span style="color: #00C">out</span>.<span style="color: #00C">println</span>(<span style="background-color: #FFF0F0">&quot;Incorrecto!&quot;</span>);<span style="color: #BBB"> </span><span style="color: #888">// Si la letra es incorrecta, se resta una vida</span>
+<span style="color: #BBB">            </span>}
+<span style="color: #BBB">            </span>
+<span style="color: #BBB">            </span><span style="color: #080; font-weight: bold">if</span><span style="color: #BBB"> </span>(palabraCompleta(palabraActual))<span style="color: #BBB"> </span>{<span style="color: #BBB"> </span><span style="color: #888">// Comprueba si la palabra ha sido completada usando el metodo palabraCompleta (linea 112).</span>
+<span style="color: #BBB">                </span>System.<span style="color: #00C">out</span>.<span style="color: #00C">println</span>(<span style="background-color: #FFF0F0">&quot;\nHas ganado! La palabra era: &quot;</span><span style="color: #BBB"> </span><span style="color: #333">+</span><span style="color: #BBB"> </span>palabraElegida);
+<span style="color: #BBB">                </span><span style="color: #080; font-weight: bold">break</span>;<span style="color: #BBB"> </span><span style="color: #888">// Este break es muy importante para salir del bucle cuando se gana (while)</span>
+<span style="color: #BBB">            </span>}
+<span style="color: #BBB">        </span>
+<span style="color: #BBB">        </span>
+<span style="color: #BBB">        </span><span style="color: #080; font-weight: bold">if</span><span style="color: #BBB"> </span>(vidas<span style="color: #BBB"> </span><span style="color: #333">==</span><span style="color: #BBB"> </span><span style="color: #00D; font-weight: bold">0</span>)<span style="color: #BBB"> </span>{<span style="color: #BBB"> </span><span style="color: #888">// Si se quedan sin vidas, se muestra el mensaje de derrota</span>
+<span style="color: #BBB">            </span>System.<span style="color: #00C">out</span>.<span style="color: #00C">println</span>(<span style="background-color: #FFF0F0">&quot;\nHas perdido! La palabra era: &quot;</span><span style="color: #BBB"> </span><span style="color: #333">+</span><span style="color: #BBB"> </span>palabraElegida);
+<span style="color: #BBB">            </span>}
+<span style="color: #BBB">        </span>}<span style="color: #080; font-weight: bold">else</span>{<span style="color: #BBB"> </span><span style="color: #888">// Mensaje de error si no se introduce una letra</span>
+<span style="color: #BBB">                </span>System.<span style="color: #00C">out</span>.<span style="color: #00C">println</span>(<span style="background-color: #FFF0F0">&quot;Por favor introduce una letra&quot;</span>);
+<span style="color: #BBB">            </span>}
+<span style="color: #BBB">     </span>}<span style="color: #BBB"> </span>
+<span style="color: #BBB">        </span>
+<span style="color: #BBB">        </span>in.<span style="color: #00C">close</span>();
+<span style="color: #BBB">    </span>}
+<span style="color: #BBB">    </span>
+<span style="color: #BBB">    </span><span style="color: #080; font-weight: bold">private</span><span style="color: #BBB"> </span>String<span style="color: #BBB"> </span><span style="color: #06B; font-weight: bold">mostrarPalabra</span>(<span style="color: #339; font-weight: bold">char</span><span style="color: #333">[]</span><span style="color: #BBB"> </span>palabra)<span style="color: #BBB"> </span>{<span style="color: #BBB"> </span><span style="color: #888">// Metodo para mostrar la palabra actual con espacios entre letras</span>
+<span style="color: #BBB">        </span>String<span style="color: #BBB"> </span>resultado<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;&quot;</span>;
+<span style="color: #BBB">        </span><span style="color: #080; font-weight: bold">for</span><span style="color: #BBB"> </span>(<span style="color: #339; font-weight: bold">char</span><span style="color: #BBB"> </span>guiones<span style="color: #BBB"> </span>:<span style="color: #BBB"> </span>palabra)<span style="color: #BBB"> </span>{<span style="color: #BBB"> </span><span style="color: #888">// Recorre cada caracter del array palabra</span>
+<span style="color: #BBB">            </span>resultado<span style="color: #BBB"> </span><span style="color: #333">+=</span><span style="color: #BBB"> </span>guiones<span style="color: #BBB"> </span><span style="color: #333">+</span><span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot; &quot;</span>;<span style="color: #BBB"> </span><span style="color: #888">// AÃ±ade cada caracter seguido de un espacio al resultado</span>
+<span style="color: #BBB">        </span>}
+<span style="color: #BBB">        </span><span style="color: #080; font-weight: bold">return</span><span style="color: #BBB"> </span>resultado;
+<span style="color: #BBB">    </span>}
+<span style="color: #BBB">    </span>
+<span style="color: #BBB">    </span><span style="color: #080; font-weight: bold">private</span><span style="color: #BBB"> </span><span style="color: #339; font-weight: bold">boolean</span><span style="color: #BBB"> </span><span style="color: #06B; font-weight: bold">palabraCompleta</span>(<span style="color: #339; font-weight: bold">char</span><span style="color: #333">[]</span><span style="color: #BBB"> </span>palabra)<span style="color: #BBB"> </span>{
+<span style="color: #BBB">        </span><span style="color: #080; font-weight: bold">for</span><span style="color: #BBB"> </span>(<span style="color: #339; font-weight: bold">char</span><span style="color: #BBB"> </span>guiones<span style="color: #BBB"> </span>:<span style="color: #BBB"> </span>palabra)<span style="color: #BBB"> </span>{
+<span style="color: #BBB">            </span><span style="color: #080; font-weight: bold">if</span><span style="color: #BBB"> </span>(guiones<span style="color: #BBB"> </span><span style="color: #333">==</span><span style="color: #BBB"> </span><span style="color: #04D">&#39;_&#39;</span>)<span style="color: #BBB"> </span>{
+<span style="color: #BBB">                </span><span style="color: #080; font-weight: bold">return</span><span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">false</span>;
+<span style="color: #BBB">            </span>}
+<span style="color: #BBB">        </span>}
+<span style="color: #BBB">        </span><span style="color: #080; font-weight: bold">return</span><span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">true</span>;
+<span style="color: #BBB">    </span>}
+<span style="color: #BBB">    </span>
+<span style="color: #BBB">    </span><span style="color: #080; font-weight: bold">public</span><span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">static</span><span style="color: #BBB"> </span><span style="color: #339; font-weight: bold">void</span><span style="color: #BBB"> </span><span style="color: #06B; font-weight: bold">main</span>(String<span style="color: #333">[]</span><span style="color: #BBB"> </span>args)<span style="color: #BBB"> </span>{
+<span style="color: #BBB">        </span>MainTest<span style="color: #BBB"> </span>juego<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">new</span><span style="color: #BBB"> </span>MainTest();
+<span style="color: #BBB">        </span>juego.<span style="color: #00C">jugarAhorcado</span>();
+<span style="color: #BBB">    </span>}
+}
+</pre></div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Equipo 3 - Colección de Juegos Clásicos</p>
+    </footer>
+</body>
+</html>
