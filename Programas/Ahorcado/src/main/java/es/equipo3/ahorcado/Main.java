@@ -4,8 +4,9 @@ import java.util.Random;
 public class Main {
 
     public static void main(String[] args) {
-        Ahorcado ahorcado = new Ahorcado();
-        ahorcado.jugarAhorcado();
+        Ahorcado juego = new Ahorcado();
+        juego.jugarAhorcado();
+    
     }
 }
 

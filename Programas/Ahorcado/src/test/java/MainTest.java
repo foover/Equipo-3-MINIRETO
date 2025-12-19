@@ -1,11 +1,22 @@
-package es.equipo3.ahorcado;
 
 import java.util.Random;
-import java.util.Scanner;
 
-public class Ahorcado {
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
 
-    private final String[] palabras = { // Cambiar este array a otra clase para mayor limpieza
+/**
+ *
+ * @author hugoa
+ */
+public class MainTest {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        private final String[] palabras = {
         "casa", "perro", "gato", "mesa", "silla", "libro", "lapiz", "papel", "flor", "arbol",
         "coche", "rueda", "puerta", "ventana", "techo", "pared", "suelo", "camino", "rio", "mar",
         "playa", "arena", "ola", "nube", "cielo", "lluvia", "viento", "fuego", "tierra", "piedra",
@@ -46,81 +57,31 @@ public class Ahorcado {
         "mente", "pensamiento", "idea", "memoria", "sueno", "atencion", "concentracion", "logica", "razon", "decision"
     };
 
-    public void jugarAhorcado() { // Metodo principal del juego
-        Scanner in = new Scanner(System.in);
-        Random rand = new Random();
-        
-        String palabraElegida = palabras[rand.nextInt(palabras.length)]; // Selecciona una palabra aleatoria del array
-        char[] palabraActual = new char[palabraElegida.length()]; // Crea un array con la misma longitud que la palabra elegida anteriormente
-        
-        for (int i = 0; i < palabraActual.length; i++) {
-            palabraActual[i] = '_'; // Rellena el array con guiones bajos para representar las letras no adivinadas
+    public void jugarAhorcado() {
+        Random r = new Random();
+        String palabraElegida = "";
+        int y = r.nextInt(379) + 1;
+
+        palabraElegida = palabras[y];
+//        palabra = for(int i = 0; i < palabraElegida.length() - 1; i++){
+//        
+//            
+//            
+//        }
+        String[] letras = new String[palabraElegida.length()];
+
+        for (int i = 0; i < palabraElegida.length(); i++) {
+
+            if (i == palabraElegida.length()) {
+                letras[i] = palabraElegida.substring(i);
+            }else{
+                letras[i] = palabraElegida.substring(i, i + 1);
+            }
         }
-        
-        int vidas = 6; // Cambiar esta funcion a corazones o algun otro simbolo para mayor estetica y colocar por encima del todo
-        
-        System.out.println("JUEGO DEL AHORCADO");
-        System.out.println("Tienes " + vidas + " vidas");
-        
-        while (vidas > 0) {
-            System.out.println("\nPalabra: " + mostrarPalabra(palabraActual)); // Muestra la palabra actual con las letras adivinadas y los guiones bajos usando el metodo mostrarPalabra (linea 104).
-            System.out.println("Vidas: " + vidas);
-            System.out.print("Introduce una letra: ");
-            
-            char letra = in.next().toLowerCase().charAt(0); // Lee la letra introducida por el usuario, se lee como un String y se convierte a char, para la           validacion se recoge el primer caracter de la cadena introducida.
-            if(Character.isLetter(letra)){ // Validacion para asegurarse de que el usuario introduce una letra
-            boolean acierto = false; // Inicializa la variable acierto como false
-            for (int i = 0; i < palabraElegida.length(); i++) { // Recorre la palabra elegida
-                if (palabraElegida.charAt(i) == letra) { // Comprueba si la letra introducida coincide con alguna letra de la palabra
-                    palabraActual[i] = letra;
-                    acierto = true;
-                }
-            }
-            
-            if (acierto) {
-                System.out.println("Correcto!"); // Si la letra es correcta, no se resta vida
-            } else {
-                vidas--;
-                System.out.println("Incorrecto!"); // Si la letra es incorrecta, se resta una vida
-            }
-            
-            if (palabraCompleta(palabraActual)) { // Comprueba si la palabra ha sido completada usando el metodo palabraCompleta (linea 112).
-                System.out.println("\nHas ganado! La palabra era: " + palabraElegida);
-                break; // Este break es muy importante para salir del bucle cuando se gana (while)
-            }
-        
-        
-        if (vidas == 0) { // Si se quedan sin vidas, se muestra el mensaje de derrota
-            System.out.println("\nHas perdido! La palabra era: " + palabraElegida);
-            }
-        }else{ // Mensaje de error si no se introduce una letra
-                System.out.println("Por favor introduce una letra");
-            }
-     } 
-        
-        in.close();
+        for(int i = 0; i < palabraElegida.length(); i++){
+            System.out.print("_ ");
+            System.out.print(letras[i]);
+        }
     }
     
-    private String mostrarPalabra(char[] palabra) { // Metodo para mostrar la palabra actual con espacios entre letras
-        String resultado = "";
-        for (char guiones : palabra) { // Recorre cada caracter del array palabra
-            resultado += guiones + " "; // Añade cada caracter seguido de un espacio al resultado
-        }
-        /* Este trozo de codigo es equivalente al for each de arriba
-        for (int i = 0; i < palabra.length; i++) {
-          char guiones = palabra[i];
-          resultado += guiones + " ";
-            }
-        */
-        return resultado;
-    }
-    
-    private boolean palabraCompleta(char[] palabra) { // Metodo para comprobar si la palabra ha sido completada
-        for (char guiones : palabra) { // Recorre cada caracter del array palabra
-            if (guiones == '_') { // Si encuentra un guion bajo, significa que la palabra no está completa
-                return false;
-            }
-        }
-        return true; // Si no encuentra guiones bajos, la palabra está completa
-    }
-} 
+}
