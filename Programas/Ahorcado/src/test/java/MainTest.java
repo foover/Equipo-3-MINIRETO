@@ -1,10 +1,22 @@
-package es.equipo3.ahorcado;
 
 import java.util.Random;
 
-public class Ahorcado {
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
 
-    private final String[] palabras = {
+/**
+ *
+ * @author hugoa
+ */
+public class MainTest {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        private final String[] palabras = {
         "casa", "perro", "gato", "mesa", "silla", "libro", "lapiz", "papel", "flor", "arbol",
         "coche", "rueda", "puerta", "ventana", "techo", "pared", "suelo", "camino", "rio", "mar",
         "playa", "arena", "ola", "nube", "cielo", "lluvia", "viento", "fuego", "tierra", "piedra",
@@ -71,5 +83,5 @@ public class Ahorcado {
             System.out.print(letras[i]);
         }
     }
+    
 }
-z
