@@ -269,72 +269,98 @@
     <main>
         <a href="index.html" class="back-button">← Volver a Juegos</a>
 
-        <div class="code-header">
-            <h2>🎯 Ahorcado</h2>
-            <p>Implementación del clásico juego del ahorcado en Java</p>
-            
-            <div class="code-tabs">
-                <div class="tab active">Main.java</div>
-                <div class="tab">Ahorcado.java</div>
-            </div>
-        </div>
-
         <div class="code-container">
-            <div class="code-toolbar">
-                <span class="file-name">📄 Main.java</span>
-                <button class="copy-button">Copiar código</button>
-            </div>
-            
-            <div class="code-content">
-                <pre><code><span class="line-number"> 1</span><span class="keyword">package</span> es.equipo3.ahorcado;
-<span class="line-number"> 2</span>
-<span class="line-number"> 3</span><span class="keyword">public class</span> <span class="class-name">Main</span> {
-<span class="line-number"> 4</span>
-<span class="line-number"> 5</span>    <span class="keyword">public static void</span> <span class="method">main</span>(<span class="class-name">String</span>[] args) {
-<span class="line-number"> 6</span>        <span class="comment">// Crear instancia del juego</span>
-<span class="line-number"> 7</span>        <span class="class-name">Ahorcado</span> ahorcado = <span class="keyword">new</span> <span class="class-name">Ahorcado</span>();
-<span class="line-number"> 8</span>        
-<span class="line-number"> 9</span>        <span class="comment">// Iniciar el juego</span>
-<span class="line-number">10</span>        ahorcado.<span class="method">jugarAhorcado</span>();
-<span class="line-number">11</span>        
-<span class="line-number">12</span>        <span class="comment">// Mensaje de bienvenida</span>
-<span class="line-number">13</span>        <span class="class-name">System</span>.out.<span class="method">println</span>(<span class="string">"¡Bienvenido al Ahorcado!"</span>);
-<span class="line-number">14</span>    }
-<span class="line-number">15</span>}</code></pre>
-            </div>
-        </div>
+    <div class="code-toolbar">
+        <span class="file-name">📄 Main.java</span>
+        <button class="copy-button">Copiar código</button>
+    </div>
 
-        <div style="height: 2rem;"></div>
-
-        <div class="code-container">
-            <div class="code-toolbar">
-                <span class="file-name">📄 Ahorcado.java</span>
-                <button class="copy-button">Copiar código</button>
-            </div>
-            
-            <div class="code-content">
-                <pre><code><span class="line-number"> 1</span><span class="keyword">package</span> es.equipo3.ahorcado;
-<span class="line-number"> 2</span>
-<span class="line-number"> 3</span><span class="keyword">import</span> java.util.Random;
-<span class="line-number"> 4</span><span class="keyword">import</span> java.util.Scanner;
-<span class="line-number"> 5</span>
-<span class="line-number"> 6</span><span class="keyword">public class</span> <span class="class-name">Ahorcado</span> {
-<span class="line-number"> 7</span>
-<span class="line-number"> 8</span>    <span class="keyword">private</span> <span class="class-name">String</span>[] palabras;
-<span class="line-number"> 9</span>    <span class="keyword">private</span> <span class="keyword">int</span> intentos;
-<span class="line-number">10</span>    
-<span class="line-number">11</span>    <span class="keyword">public void</span> <span class="method">jugarAhorcado</span>() {
-<span class="line-number">12</span>        <span class="class-name">Scanner</span> scanner = <span class="keyword">new</span> <span class="class-name">Scanner</span>(<span class="class-name">System</span>.in);
-<span class="line-number">13</span>        <span class="class-name">Random</span> random = <span class="keyword">new</span> <span class="class-name">Random</span>();
-<span class="line-number">14</span>        
-<span class="line-number">15</span>        <span class="comment">// Seleccionar palabra aleatoria</span>
-<span class="line-number">16</span>        <span class="class-name">String</span> palabra = palabras[random.<span class="method">nextInt</span>(palabras.length)];
-<span class="line-number">17</span>        
-<span class="line-number">18</span>        <span class="class-name">System</span>.out.<span class="method">println</span>(<span class="string">"¡Adivina la palabra!"</span>);
-<span class="line-number">19</span>    }
-<span class="line-number">20</span>}</code></pre>
-            </div>
-        </div>
+    <div class="code-content">
+<pre><code>
+<span class="line-number">1</span><span class="keyword">package</span> <span class="class-name">es.equipo3.ahorcado.test</span>;
+<span class="line-number">2</span>
+<span class="line-number">3</span><span class="keyword">import</span> <span class="class-name">java.util.Random</span>;
+<span class="line-number">4</span><span class="keyword">import</span> <span class="class-name">java.util.Scanner</span>;
+<span class="line-number">5</span>
+<span class="line-number">6</span><span class="keyword">public class</span> <span class="class-name">MainTest</span> {
+<span class="line-number">7</span>
+<span class="line-number">8</span>    <span class="keyword">private final</span> String[] palabras = {
+<span class="line-number">9</span>        <span class="string">"casa"</span>, <span class="string">"perro"</span>, <span class="string">"gato"</span>, <span class="string">"mesa"</span>, <span class="string">"silla"</span>,
+<span class="line-number">10</span>        <span class="string">"libro"</span>, <span class="string">"lapiz"</span>, <span class="string">"papel"</span>, <span class="string">"flor"</span>, <span class="string">"arbol"</span>,
+<span class="line-number">11</span>        <span class="string">"coche"</span>, <span class="string">"rueda"</span>, <span class="string">"puerta"</span>, <span class="string">"ventana"</span>, <span class="string">"techo"</span>,
+<span class="line-number">12</span>        <span class="string">"pared"</span>, <span class="string">"suelo"</span>, <span class="string">"camino"</span>, <span class="string">"rio"</span>, <span class="string">"mar"</span>,
+<span class="line-number">13</span>        <span class="string">"playa"</span>, <span class="string">"arena"</span>, <span class="string">"ola"</span>, <span class="string">"nube"</span>, <span class="string">"cielo"</span>,
+<span class="line-number">14</span>        <span class="string">"lluvia"</span>, <span class="string">"viento"</span>, <span class="string">"fuego"</span>, <span class="string">"tierra"</span>, <span class="string">"piedra"</span>,
+<span class="line-number">15</span>        <span class="string">"montana"</span>, <span class="string">"valle"</span>, <span class="string">"bosque"</span>, <span class="string">"hoja"</span>, <span class="string">"rama"</span>,
+<span class="line-number">16</span>        <span class="string">"tronco"</span>, <span class="string">"raiz"</span>, <span class="string">"semilla"</span>, <span class="string">"fruto"</span>, <span class="string">"campo"</span>,
+<span class="line-number">17</span>        <span class="string">"ciudad"</span>, <span class="string">"pueblo"</span>, <span class="string">"barrio"</span>, <span class="string">"calle"</span>, <span class="string">"plaza"</span>,
+<span class="line-number">18</span>        <span class="string">"puente"</span>, <span class="string">"torre"</span>, <span class="string">"castillo"</span>, <span class="string">"iglesia"</span>, <span class="string">"escuela"</span>,
+<span class="line-number">19</span>        <span class="string">"clase"</span>, <span class="string">"alumno"</span>, <span class="string">"profesor"</span>, <span class="string">"examen"</span>, <span class="string">"nota"</span>,
+<span class="line-number">20</span>        <span class="string">"libreta"</span>, <span class="string">"mochila"</span>, <span class="string">"ordenador"</span>, <span class="string">"teclado"</span>, <span class="string">"raton"</span>,
+<span class="line-number">21</span>        <span class="string">"pantalla"</span>, <span class="string">"telefono"</span>, <span class="string">"mensaje"</span>, <span class="string">"correo"</span>, <span class="string">"internet"</span>,
+<span class="line-number">22</span>        <span class="string">"codigo"</span>, <span class="string">"programa"</span>, <span class="string">"variable"</span>, <span class="string">"bucle"</span>, <span class="string">"condicion"</span>,
+<span class="line-number">23</span>        <span class="string">"funcion"</span>, <span class="string">"clasejava"</span>, <span class="string">"metodo"</span>, <span class="string">"objeto"</span>, <span class="string">"array"</span>,
+<span class="line-number">24</span>        <span class="string">"lista"</span>, <span class="string">"numero"</span>, <span class="string">"cadena"</span>, <span class="string">"booleano"</span>, <span class="string">"entero"</span>,
+<span class="line-number">25</span>        <span class="string">"decimal"</span>, <span class="string">"suma"</span>, <span class="string">"resta"</span>, <span class="string">"producto"</span>, <span class="string">"division"</span>,
+<span class="line-number">26</span>        <span class="string">"resultado"</span>, <span class="string">"error"</span>, <span class="string">"debug"</span>, <span class="string">"compilar"</span>, <span class="string">"ejecutar"</span>
+<span class="line-number">27</span>    };
+<span class="line-number">28</span>
+<span class="line-number">29</span>    <span class="keyword">public void</span> <span class="method">jugarAhorcado</span>() {
+<span class="line-number">30</span>        Scanner in = <span class="keyword">new</span> Scanner(System.in);
+<span class="line-number">31</span>        Random rand = <span class="keyword">new</span> Random();
+<span class="line-number">32</span>        String palabraElegida = palabras[rand.nextInt(palabras.length)];
+<span class="line-number">33</span>        <span class="keyword">char</span>[] palabraActual = <span class="keyword">new</span> <span class="keyword">char</span>[palabraElegida.length()];
+<span class="line-number">34</span>        <span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i &lt; palabraActual.length; i++) {
+<span class="line-number">35</span>            palabraActual[i] = <span class="string">'_'</span>;
+<span class="line-number">36</span>        }
+<span class="line-number">37</span>        <span class="keyword">int</span> vidas = <span class="number">6</span>;
+<span class="line-number">38</span>        <span class="keyword">boolean</span> ganada = <span class="keyword">false</span>;
+<span class="line-number">39</span>        <span class="keyword">while</span> (vidas &gt; <span class="number">0</span> &amp;&amp; !ganada) {
+<span class="line-number">40</span>            System.out.println(<span class="string">"Palabra:"</span>);
+<span class="line-number">41</span>            <span class="keyword">for</span> (<span class="keyword">char</span> c : palabraActual) {
+<span class="line-number">42</span>                System.out.print(c + <span class="string">" "</span>);
+<span class="line-number">43</span>            }
+<span class="line-number">44</span>            System.out.println();
+<span class="line-number">45</span>            System.out.println(<span class="string">"Vidas restantes: "</span> + vidas);
+<span class="line-number">46</span>            System.out.print(<span class="string">"Introduce una letra: "</span>);
+<span class="line-number">47</span>            <span class="keyword">char</span> letra = in.next().charAt(<span class="number">0</span>);
+<span class="line-number">48</span>            <span class="keyword">boolean</span> acierto = <span class="keyword">false</span>;
+<span class="line-number">49</span>            <span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i &lt; palabraElegida.length(); i++) {
+<span class="line-number">50</span>                <span class="keyword">if</span> (palabraElegida.charAt(i) == letra) {
+<span class="line-number">51</span>                    palabraActual[i] = letra;
+<span class="line-number">52</span>                    acierto = <span class="keyword">true</span>;
+<span class="line-number">53</span>                }
+<span class="line-number">54</span>            }
+<span class="line-number">55</span>            <span class="keyword">if</span> (!acierto) {
+<span class="line-number">56</span>                vidas--;
+<span class="line-number">57</span>                System.out.println(<span class="string">"Letra incorrecta."</span>);
+<span class="line-number">58</span>            } <span class="keyword">else</span> {
+<span class="line-number">59</span>                System.out.println(<span class="string">"¡Buen acierto!"</span>);
+<span class="line-number">60</span>            }
+<span class="line-number">61</span>            ganada = <span class="keyword">true</span>;
+<span class="line-number">62</span>            <span class="keyword">for</span> (<span class="keyword">char</span> c : palabraActual) {
+<span class="line-number">63</span>                <span class="keyword">if</span> (c == <span class="string">'_'</span>) {
+<span class="line-number">64</span>                    ganada = <span class="keyword">false</span>;
+<span class="line-number">65</span>                    <span class="keyword">break</span>;
+<span class="line-number">66</span>                }
+<span class="line-number">67</span>            }
+<span class="line-number">68</span>        }
+<span class="line-number">69</span>        <span class="keyword">if</span> (ganada) {
+<span class="line-number">70</span>            System.out.println(<span class="string">"¡Has ganado! La palabra era: "</span> + palabraElegida);
+<span class="line-number">71</span>        } <span class="keyword">else</span> {
+<span class="line-number">72</span>            System.out.println(<span class="string">"Has perdido. La palabra era: "</span> + palabraElegida);
+<span class="line-number">73</span>        }
+<span class="line-number">74</span>        in.close();
+<span class="line-number">75</span>    }
+<span class="line-number">76</span>
+<span class="line-number">77</span>    <span class="keyword">public static void</span> <span class="method">main</span>(String[] args) {
+<span class="line-number">78</span>        MainTest juego = <span class="keyword">new</span> MainTest();
+<span class="line-number">79</span>        juego.jugarAhorcado();
+<span class="line-number">80</span>    }
+<span class="line-number">81</span>}
+</code></pre>
+    </div>
+</div>
     </main>
 
     <footer>
