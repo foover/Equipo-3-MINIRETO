@@ -67,9 +67,9 @@ public class Main {
                 System.out.println("Reglas del juego:\n"
                     + "1. El objetivo del juego es ser el primer jugador en conectar cuatro de sus fichas en una fila, ya sea horizontal, vertical o diagonalmente.\n"
                     + "2. El juego se juega en un tablero de 7 columnas y 6 filas.\n"
-                    + "3. Los jugadores se turnan para colocar una ficha en una columna de su elección.\n"
-                    + "4. La ficha caerá hasta la posición más baja disponible en esa columna.\n"
-                    + "5. El juego termina cuando un jugador conecta cuatro fichas o cuando el tablero está lleno, resultando en un empate.\n"
+                    + "3. Los jugadores se turnan para colocar una ficha en una columna de su eleccion.\n"
+                    + "4. La ficha caera hasta la posición mas baja disponible en esa columna.\n"
+                    + "5. El juego termina cuando un jugador conecta cuatro fichas o cuando el tablero esta lleno, resultando en un empate.\n"
                     + "6. IMPOTRANTE Introduce solo numeros del 0 al 6 para seleccionar la columna.\n"
                     + "Buena suerte!\n");
                 System.out.println("-------> Has entendido las reglas? (Si/No)\n");
