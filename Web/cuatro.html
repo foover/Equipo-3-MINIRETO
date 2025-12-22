@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Código - Cuatro en Raya</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #1a1a1a;
+    color: #e0e0e0;
+}
+
+header {
+    background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+    padding: 2.5rem 0;
+    border-bottom: 2px solid #333;
+}
+
+header h1 {
+    text-align: center;
+    color: #fff;
+    font-size: 2.5rem;
+}
+
+header p {
+    text-align: center;
+    color: #999;
+}
+
+main {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+}
+
+.code-container {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.code-toolbar {
+    background: #252525;
+    padding: 1rem;
+    border-bottom: 1px solid #333;
+}
+
+.code-content {
+    padding: 1.5rem;
+    overflow-x: auto;
+}
+
+pre {
+    margin: 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.line-number {
+    color: #858585;
+    margin-right: 1.5rem;
+    user-select: none;
+}
+
+/* Colores */
+.keyword { color: #569cd6; font-weight: bold; }
+.class-name { color: #4ec9b0; }
+.string { color: #ce9178; }
+.comment { color: #6a9955; font-style: italic; }
+.number { color: #b5cea8; }
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Código del Juego</h1>
+    <p>Cuatro en Raya - Java</p>
+</header>
+
+<main>
+<div class="code-container">
+<div class="code-toolbar">📄 cuatro.java</div>
+
+<div class="code-content">
+<pre><code>
+<span class="line-number">1</span><span class="comment">/*</span>
+<span class="line-number">2</span><span class="comment"> * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license</span>
+<span class="line-number">3</span><span class="comment"> * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template</span>
+<span class="line-number">4</span><span class="comment"> */</span>
+<span class="line-number">5</span><span class="keyword">package</span> <span class="class-name">Paquete</span>;
+<span class="line-number">6</span>
+<span class="line-number">7</span><span class="keyword">import</span> <span class="class-name">java.util.Scanner</span>;
+<span class="line-number">8</span>
+<span class="line-number">9</span><span class="comment">/**</span>
+<span class="line-number">10</span><span class="comment"> * Cuatro en raya: Se trata de un tablero vertical de 6 Filas (altura) por 7</span>
+<span class="line-number">11</span><span class="comment"> * Columna (ancho). En el estado inicial: Todas las casillas están vacías (valor</span>
+<span class="line-number">12</span><span class="comment"> * 0). El jugador no elige la fila, solo elige la Columna.</span>
+<span class="line-number">13</span><span class="comment"> * Al desarrollar la lógica, cuando un jugador selecciona una columna:</span>
+<span class="line-number">14</span><span class="comment"> * Revisar desde abajo hacia arriba.</span>
+<span class="line-number">15</span><span class="comment"> */</span>
+<span class="line-number">16</span><span class="keyword">public class</span> <span class="class-name">cuatro</span> {
+<span class="line-number">17</span>
+<span class="line-number">18</span>    <span class="keyword">private</span> <span class="keyword">char</span>[][] tabla;
+<span class="line-number">19</span>    
+<span class="line-number">20</span>    <span class="keyword">private final</span> <span class="keyword">char</span> j1 = <span class="string">'x'</span>;
+<span class="line-number">21</span>    <span class="keyword">private final</span> <span class="keyword">char</span> j2 = <span class="string">'o'</span>;
+<span class="line-number">22</span>    <span class="keyword">private final</span> <span class="keyword">char</span> vacio = <span class="string">'.'</span>;
+<span class="line-number">23</span>    <span class="keyword">private</span> <span class="keyword">boolean</span> turno;
+<span class="line-number">24</span>
+<span class="line-number">25</span>    
+<span class="line-number">26</span>    
+<span class="line-number">27</span>    <span class="comment">// SE CONSTRUYE UNA TABLA CON LOS PUNTOS</span>
+<span class="line-number">28</span>    <span class="keyword">public void</span> tabla2() {
+<span class="line-number">29</span>        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; tabla.length; i++) {
+<span class="line-number">30</span>            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; tabla[i].length; j++) {
+<span class="line-number">31</span>                tabla[i][j] = vacio;
+<span class="line-number">32</span>            }
+<span class="line-number">33</span>        }
+<span class="line-number">34</span>    }
+<span class="line-number">35</span>    
+<span class="line-number">36</span>    
+<span class="line-number">37</span>    <span class="comment">// ES EL CONSTRUCTOR POR DEFECTO</span>
+<span class="line-number">38</span>    <span class="keyword">public</span> <span class="method">cuatro</span>() {
+<span class="line-number">39</span>        <span class="keyword">this</span>.turno = <span class="keyword">true</span>;
+<span class="line-number">40</span>        <span class="keyword">this</span>.tabla = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">6</span>][<span class="number">7</span>];
+<span class="line-number">41</span>        <span class="keyword">this</span>.tabla2();
+<span class="line-number">42</span>    }
+<span class="line-number">43</span>    
+<span class="line-number">44</span>    
+<span class="line-number">45</span>    <span class="comment">// MUESTRA LA TABLA</span>
+<span class="line-number">46</span>    <span class="keyword">public void</span> mostrarTabla(){
+<span class="line-number">47</span>        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.tabla.length; i++) {
+<span class="line-number">48</span>            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="keyword">this</span>.tabla[i].length; j++) {
+<span class="line-number">49</span>                System.out.print(<span class="keyword">this</span>.tabla[i][j] + <span class="string">" "</span>);
+<span class="line-number">50</span>            }
+<span class="line-number">51</span>            System.out.println(<span class="string">""</span>);
+<span class="line-number">52</span>        }
+<span class="line-number">53</span>    }
+<span class="line-number">54</span>    
+<span class="line-number">55</span>    
+<span class="line-number">56</span>    <span class="keyword">public void</span> mostrarTurno(){
+<span class="line-number">57</span>        <span class="keyword">if</span>(turno){
+<span class="line-number">58</span>            System.out.println(<span class="string">"Turno del jugador 1"</span>);
+<span class="line-number">59</span>        }<span class="keyword">else</span>{
+<span class="line-number">60</span>            System.out.println(<span class="string">"Turno del jugador 2"</span>);
+<span class="line-number">61</span>        }
+<span class="line-number">62</span>    }
+<span class="line-number">63</span>    
+<span class="line-number">64</span>    
+<span class="line-number">65</span>    <span class="comment">// CAMBIA DE TURNO</span>
+<span class="line-number">66</span>    <span class="keyword">public void</span> cambioTurno(){
+<span class="line-number">67</span>        <span class="keyword">this</span>.turno = !<span class="keyword">this</span>.turno;
+<span class="line-number">68</span>    }
+<span class="line-number">69</span>    
+<span class="line-number">70</span>    
+<span class="line-number">71</span>    <span class="comment">// SE INSERTA EL SIMBOLO EN LA TABLA</span>
+<span class="line-number">72</span>    <span class="keyword">public void</span> insertarEn(<span class="keyword">int</span> columna){
+<span class="line-number">73</span>        
+<span class="line-number">74</span>        <span class="keyword">for</span>(<span class="keyword">int</span> i = tabla.length - <span class="number">1</span>; i &gt;= <span class="number">0</span> ; i--) {
+<span class="line-number">75</span>            
+<span class="line-number">76</span>            <span class="keyword">if</span>(tabla[i][columna] == vacio){
+<span class="line-number">77</span>                <span class="keyword">if</span> (turno){
+<span class="line-number">78</span>                tabla[i][columna] = j1;
+<span class="line-number">79</span>                }<span class="keyword">else</span>{
+<span class="line-number">80</span>                tabla[i][columna] = j2;
+<span class="line-number">81</span>                }  
+<span class="line-number">82</span>                <span class="keyword">return</span>;
+<span class="line-number">83</span>            }
+<span class="line-number">84</span>        }
+<span class="line-number">85</span>    }
+<span class="line-number">86</span>
+<span class="line-number">87</span>    <span class="comment">// SE VALIDA LA POSICION</span>
+<span class="line-number">88</span>    <span class="keyword">public boolean</span> validarPos(<span class="keyword">int</span> fila, <span class="keyword">int</span> columna){
+<span class="line-number">89</span>        <span class="keyword">if</span> (fila &gt;= <span class="number">0</span> &amp;&amp; fila &lt; tabla.length &amp;&amp; columna &gt;= <span class="number">0</span> &amp;&amp; columna &lt; tabla[<span class="number">0</span>].length){
+<span class="line-number">90</span>            <span class="keyword">return true</span>;
+<span class="line-number">91</span>        }<span class="keyword">else</span>{
+<span class="line-number">92</span>            <span class="keyword">return false</span>;
+<span class="line-number">93</span>        }
+<span class="line-number">94</span>    }
+<span class="line-number">95</span>    
+<span class="line-number">96</span>    <span class="comment">// indica si la tabla esta llena</span>
+<span class="line-number">97</span>    <span class="keyword">public boolean</span> tablaLlena(){
+<span class="line-number">98</span>        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; tabla.length; i++) {
+<span class="line-number">99</span>            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; tabla[i].length; j++) {
+<span class="line-number">100</span>                <span class="comment">// comprobacion de casilla actual</span>
+<span class="line-number">101</span>                <span class="keyword">if</span> (tabla[i][j] == vacio){
+<span class="line-number">102</span>                    <span class="keyword">return false</span>;
+<span class="line-number">103</span>                }
+<span class="line-number">104</span>            }
+<span class="line-number">105</span>        }
+<span class="line-number">106</span>        <span class="comment">// devuelve verdadero si la tabla esta llena</span>
+<span class="line-number">107</span>        <span class="keyword">return true</span>;
+<span class="line-number">108</span>    }
+<span class="line-number">109</span>      
+<span class="line-number">110</span>    <span class="comment">// COMPROBACION DE GANADOR EN LA COLUMNA</span>
+<span class="line-number">111</span>    <span class="keyword">private char</span> columna(){
+<span class="line-number">112</span>        <span class="comment">// recorre cada columna</span>
+<span class="line-number">113</span>        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; tabla.length; j++) {
+<span class="line-number">114</span>            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">2</span>; i++) {
+<span class="line-number">115</span>                <span class="keyword">char</span> simbolo = tabla[i][j];
+<span class="line-number">116</span>                <span class="keyword">if</span>(simbolo != vacio 
+<span class="line-number">117</span>                   &amp;&amp; simbolo == tabla[i+<span class="number">1</span>][j]
+<span class="line-number">118</span>                   &amp;&amp; simbolo == tabla[i+<span class="number">2</span>][j]
+<span class="line-number">119</span>                   &amp;&amp; simbolo == tabla[i+<span class="number">3</span>][j]){
+<span class="line-number">120</span>                    <span class="keyword">return</span> simbolo;
+<span class="line-number">121</span>                }
+<span class="line-number">122</span>            }
+<span class="line-number">123</span>        }
+<span class="line-number">124</span>        <span class="keyword">return</span> vacio;
+<span class="line-number">125</span>    }
+<span class="line-number">126</span>    
+<span class="line-number">127</span>    
+<span class="line-number">128</span>    <span class="comment">// COMPROBACION DE GANADOR EN LA FILA</span>
+<span class="line-number">129</span>    <span class="keyword">private char</span> fila(){
+<span class="line-number">130</span>        <span class="keyword">char</span> simbolo;
+<span class="line-number">131</span>        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++) {
+<span class="line-number">132</span>            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">4</span>; j++) {
+<span class="line-number">133</span>                simbolo = tabla[i][j];
+<span class="line-number">134</span>                <span class="keyword">if</span>(simbolo != vacio 
+<span class="line-number">135</span>                   &amp;&amp; simbolo == tabla[i][j+<span class="number">1</span>]
+<span class="line-number">136</span>                   &amp;&amp; simbolo == tabla[i][j+<span class="number">2</span>]
+<span class="line-number">137</span>                   &amp;&amp; simbolo == tabla[i][j+<span class="number">3</span>]){
+<span class="line-number">138</span>                    <span class="keyword">return</span> simbolo;
+<span class="line-number">139</span>                }
+<span class="line-number">140</span>            }
+<span class="line-number">141</span>        }
+<span class="line-number">142</span>        <span class="keyword">return</span> vacio;
+<span class="line-number">143</span>    }
+<span class="line-number">144</span>
+<span class="line-number">145</span>    
+<span class="line-number">146</span>    <span class="comment">// COMPROBACION DE GANADOR EN LA DIAGONAL</span>
+<span class="line-number">147</span>    <span class="keyword">private char</span> diagonal(){
+<span class="line-number">148</span>        <span class="keyword">char</span> simbolo;
+<span class="line-number">149</span>        
+<span class="line-number">150</span>        <span class="comment">// diagonal principal (\)</span>
+<span class="line-number">151</span>        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">2</span>; i++) {
+<span class="line-number">152</span>            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= <span class="number">3</span>; j++) {
+<span class="line-number">153</span>                simbolo = tabla[i][j];
+<span class="line-number">154</span>                <span class="keyword">if</span>(simbolo != vacio
+<span class="line-number">155</span>                   &amp;&amp; simbolo == tabla[i+<span class="number">1</span>][j+<span class="number">1</span>]
+<span class="line-number">156</span>                   &amp;&amp; simbolo == tabla[i+<span class="number">2</span>][j+<span class="number">2</span>]
+<span class="line-number">157</span>                   &amp;&amp; simbolo == tabla[i+<span class="number">3</span>][j+<span class="number">3</span>]){
+<span class="line-number">158</span>                    <span class="keyword">return</span> simbolo;
+<span class="line-number">159</span>                }
+<span class="line-number">160</span>            }
+<span class="line-number">161</span>        }
+<span class="line-number">162</span>        
+<span class="line-number">163</span>        <span class="comment">// diagonal inversa (/)</span>
+<span class="line-number">164</span>        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">3</span>; i &lt;= <span class="number">5</span>; i++) {
+<span class="line-number">165</span>            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= <span class="number">3</span>; j++) {
+<span class="line-number">166</span>                simbolo = tabla[i][j];
+<span class="line-number">167</span>                <span class="keyword">if</span>(simbolo != vacio
+<span class="line-number">168</span>                   &amp;&amp; simbolo == tabla[i-<span class="number">1</span>][j+<span class="number">1</span>]
+<span class="line-number">169</span>                   &amp;&amp; simbolo == tabla[i-<span class="number">2</span>][j+<span class="number">2</span>]
+<span class="line-number">170</span>                   &amp;&amp; simbolo == tabla[i-<span class="number">3</span>][j+<span class="number">3</span>]){
+<span class="line-number">171</span>                    <span class="keyword">return</span> simbolo;
+<span class="line-number">172</span>                }
+<span class="line-number">173</span>            }
+<span class="line-number">174</span>        }
+<span class="line-number">175</span>        <span class="keyword">return</span> vacio;
+<span class="line-number">176</span>    }
+<span class="line-number">177</span>    
+<span class="line-number">178</span>    <span class="keyword">public boolean</span> finPartida(){
+<span class="line-number">179</span>        <span class="keyword">if</span> (tablaLlena() 
+<span class="line-number">180</span>            || fila() != vacio 
+<span class="line-number">181</span>            || columna() != vacio 
+<span class="line-number">182</span>            || diagonal() != vacio){
+<span class="line-number">183</span>            <span class="keyword">return true</span>;
+<span class="line-number">184</span>        }
+<span class="line-number">185</span>        <span class="keyword">return false</span>;
+<span class="line-number">186</span>    }
+<span class="line-number">187</span>    
+<span class="line-number">188</span>    <span class="keyword">public void</span> ganador(){
+<span class="line-number">189</span>        <span class="keyword">char</span> simboloGanador = vacio;
+<span class="line-number">190</span>        <span class="keyword">if</span> (fila() != vacio){
+<span class="line-number">191</span>            simboloGanador = fila();
+<span class="line-number">192</span>        }<span class="keyword">else if</span> (columna() != vacio){
+<span class="line-number">193</span>            simboloGanador = columna();
+<span class="line-number">194</span>        }<span class="keyword">else if</span> (diagonal() != vacio){
+<span class="line-number">195</span>            simboloGanador = diagonal();
+<span class="line-number">196</span>        }
+<span class="line-number">197</span>        
+<span class="line-number">198</span>        <span class="keyword">if</span> (simboloGanador == j1){
+<span class="line-number">199</span>            System.out.println(<span class="string">"Ha ganado el jugador 1: "</span> + j1);
+<span class="line-number">200</span>        }
+<span class="line-number">201</span>        <span class="keyword">else if</span> (simboloGanador == j2){
+<span class="line-number">202</span>            System.out.println(<span class="string">"Ha ganado el jugador 2: "</span> + j2);
+<span class="line-number">203</span>        }<span class="keyword">else</span>{
+<span class="line-number">204</span>            System.out.println(<span class="string">"Empate, el tablero esta lleno"</span>);
+<span class="line-number">205</span>        }
+<span class="line-number">206</span>        
+<span class="line-number">207</span>    }
+<span class="line-number">208</span>
+<span class="line-number">209</span>    <span class="keyword">public void</span> iniciarPartida(Scanner entrada){
+<span class="line-number">210</span>
+<span class="line-number">211</span>        System.out.println(<span class="string">"----CUATRO EN RAYA----"</span>);
+<span class="line-number">212</span>        System.out.println(<span class="string">"jugador 1 = x"</span>);
+<span class="line-number">213</span>        System.out.println(<span class="string">"jugador 2 = O"</span>);
+<span class="line-number">214</span>
+<span class="line-number">215</span>
+<span class="line-number">216</span>        <span class="keyword">while</span>(!this.finPartida()){
+<span class="line-number">217</span>            System.out.println(<span class="string">"---- jugada ----"</span>);
+<span class="line-number">218</span>            this.mostrarTabla();
+<span class="line-number">219</span>            System.out.println(<span class="string">""</span>);
+<span class="line-number">220</span>            this.mostrarTurno();
+<span class="line-number">221</span>
+<span class="line-number">222</span>            <span class="keyword">boolean</span> entradaValida = <span class="keyword">false</span>;
+<span class="line-number">223</span>            
+<span class="line-number">224</span>            <span class="keyword">while</span>(!entradaValida){
+<span class="line-number">225</span>                System.out.println(<span class="string">"Introduce la columna de 0-6: "</span>);
+<span class="line-number">226</span>                <span class="keyword">if</span>(!entrada.hasNextInt()){
+<span class="line-number">227</span>                    System.out.println(<span class="string">"Error, Tiene que ser un numero"</span>);
+<span class="line-number">228</span>                    entrada.next();
+<span class="line-number">229</span>                }<span class="keyword">else</span>{
+<span class="line-number">230</span>                    <span class="keyword">int</span> columna = entrada.nextInt();
+<span class="line-number">231</span>
+<span class="line-number">232</span>                    <span class="keyword">if</span>(columna &lt; <span class="number">0</span> || columna &gt; <span class="number">6</span>){
+<span class="line-number">233</span>                        System.out.println(<span class="string">"Columna invalida"</span>);
+<span class="line-number">234</span>                        entradaValida = <span class="keyword">false</span>;
+<span class="line-number">235</span>                    }<span class="keyword">else</span>{
+<span class="line-number">236</span>                        this.insertarEn(columna);
+<span class="line-number">237</span>                        entradaValida = <span class="keyword">true</span>;
+<span class="line-number">238</span>                    }
+<span class="line-number">239</span>                }
+<span class="line-number">240</span>            }
+<span class="line-number">241</span>
+<span class="line-number">242</span>            <span class="keyword">if</span>(this.finPartida()){
+<span class="line-number">243</span>                <span class="keyword">break</span>;
+<span class="line-number">244</span>            }
+<span class="line-number">245</span>            this.cambioTurno();
+<span class="line-number">246</span>        }
+<span class="line-number">247</span>        this.mostrarTabla();
+<span class="line-number">248</span>        System.out.println(<span class="string">""</span>);
+<span class="line-number">249</span>        this.ganador();
+<span class="line-number">250</span>    }
+<span class="line-number">251</span>}
+
+
+</code></pre>
+</div>
+</div>
+</main>
+
+</body>
+</html>
