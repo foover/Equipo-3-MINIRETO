@@ -81,6 +81,7 @@ public class Principal {
 
        boolean jugarOtraVez = true;
 
+       // Esto no es necesario, ya esta implementado en el menu
        while(jugarOtraVez){
             // crear juego
             cuatro juego = new cuatro();

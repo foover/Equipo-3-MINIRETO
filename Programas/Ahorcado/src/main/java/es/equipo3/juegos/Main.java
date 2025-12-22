@@ -77,8 +77,8 @@ public class Main {
                 entendido = teclado.next().toLowerCase();
                 if (entendido.equals("si")) {
                   
-                  Ahorcado ahorcado = new Ahorcado();
-                  ahorcado.jugarAhorcado(teclado);
+                  Cuatro cuatroEnRaya = new Cuatro();
+                  cuatroEnRaya.iniciarPartida(teclado);
 
                 } else if (entendido.equals("no")) {
                   
