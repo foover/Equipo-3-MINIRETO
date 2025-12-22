@@ -242,5 +242,49 @@ public class cuatro {
             System.out.println("Empate, el tablero esta lleno");
         }
         
-    }   
+    } 
+
+    public void iniciarPartida(Scanner entrada){
+
+        System.out.println("----CUATRO EN RAYA----");
+        System.out.println("jugador 1 = x");
+        System.out.println("jugador 2 = O");
+
+
+        while(!this.finPartida()){
+            System.out.println("---- jugada ----");
+            //  mostrar el tablero
+            this.mostrarTabla();
+            System.out.println("");
+            this.mostrarTurno();
+
+            boolean entradaValida = false;
+            // validacion de la entrada
+            while(!entradaValida){
+                System.out.println("Introduce la columna de 0-6: ");
+                if(!entrada.hasNextInt()){
+                    System.out.println("Error, Tiene que ser un numero");
+                    entrada.next();
+                }else{
+                    int columna = entrada.nextInt();
+
+                    if(columna < 0 || columna > 6){
+                        System.out.println("Columna invalida");
+                        entradaValida = false;
+                    }else{
+                        this.insertarEn(columna);
+                        entradaValida = true;
+                    }
+                }
+            }
+            // para salir del bucle
+            if(this.finPartida()){
+                break;
+            }
+            this.cambioTurno();
+        }
+        this.mostrarTabla();
+        System.out.println("");
+        this.ganador();
+    }  
 }

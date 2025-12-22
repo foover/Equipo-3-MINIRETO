@@ -20,6 +20,7 @@ public class Principal {
         // insertar En
         // validar Posicion 
         //buscar
+        /*
         System.out.println("----CUATRO EN RAYA----");
         
         System.out.println("jugador 1 = x");
@@ -75,5 +76,26 @@ public class Principal {
         cer.ganador();
             
         entrada.close();
+        */
+
+
+       boolean jugarOtraVez = true;
+
+       // Esto no es necesario, ya esta implementado en el menu
+       while(jugarOtraVez){
+            // crear juego
+            cuatro juego = new cuatro();
+            // iniciar
+            juego.iniciarPartida(entrada);
+
+            System.out.println("\n Quieres jugar otra vez ? (si/no)");
+            String resp = entrada.next();
+
+            if (!resp.equalsIgnoreCase("si")){
+                jugarOtraVez = false;
+                System.out.println("Gracias por jugar");
+            }
+       }
+       entrada.close();
     }    
 }
