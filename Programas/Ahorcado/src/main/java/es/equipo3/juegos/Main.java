@@ -46,15 +46,15 @@ public class Main {
 
                 entendido = teclado.next().toLowerCase();
                 if (entendido.equals("si")) {
-                  
+
                   Ahorcado ahorcado = new Ahorcado();
                   ahorcado.jugarAhorcado(teclado);
 
                 } else if (entendido.equals("no")) {
-                  
+
                   System.out.println("Por favor, lee las reglas antes de jugar.");
                   break;
-                  
+
                 } else {
                   System.out.println("Respuesta no valida. Por favor, responde con 'Si' o 'No'.");
                   break;
@@ -76,21 +76,19 @@ public class Main {
 
                 entendido = teclado.next().toLowerCase();
                 if (entendido.equals("si")) {
-                  
+
                   Cuatro cuatroEnRaya = new Cuatro();
                   cuatroEnRaya.iniciarPartida(teclado);
 
                 } else if (entendido.equals("no")) {
-                  
+
                   System.out.println("Por favor, lee las reglas antes de jugar.");
                   break;
-                  
+
                 } else {
                   System.out.println("Respuesta no valida. Por favor, responde con 'Si' o 'No'.");
                   break;
                 }
-                JugarCuatroEnRaya principal = new JugarCuatroEnRaya();
-                principal.jugarCuatroEnRaya(teclado);
 
               }
               case 3 -> {
