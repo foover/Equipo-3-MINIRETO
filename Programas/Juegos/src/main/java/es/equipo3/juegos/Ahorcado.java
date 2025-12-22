@@ -128,8 +128,7 @@ public class Ahorcado {
         System.out.println(" / \\  |");
         System.out.println("      |");
         System.out.println("=========");
-        System.out.println("\nHas perdido! La palabra era: " + palabraElegida);
-        
+               
       }
       
     }
@@ -166,9 +165,17 @@ public class Ahorcado {
           break; // Este break es muy importante para salir del bucle cuando se gana (while)
         }
         
-        if(vidas == 0){
-            break;
-        }
+       if(vidas == 0){
+           System.out.println("  +---+");
+        System.out.println("  |   |");
+        System.out.println("  O   |");
+        System.out.println(" /|\\  |");
+        System.out.println(" / \\  |");
+        System.out.println("      |");
+        System.out.println("=========");
+           System.out.println("\nHas perdido! La palabra era: " + palabraElegida);
+           break;
+       }
 
         
       } else { // Mensaje de error si no se introduce una letra
