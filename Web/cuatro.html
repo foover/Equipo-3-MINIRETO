@@ -3,93 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <title>Código - Cuatro en Raya</title>
-
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #1a1a1a;
-    color: #e0e0e0;
-}
-
-header {
-    background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
-    padding: 2.5rem 0;
-    border-bottom: 2px solid #333;
-}
-
-header h1 {
-    text-align: center;
-    color: #fff;
-    font-size: 2.5rem;
-}
-
-header p {
-    text-align: center;
-    color: #999;
-}
-
-main {
-    max-width: 1200px;
-    margin: 3rem auto;
-    padding: 0 2rem;
-}
-
-.code-container {
-    background: #1e1e1e;
-    border: 1px solid #333;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.code-toolbar {
-    background: #252525;
-    padding: 1rem;
-    border-bottom: 1px solid #333;
-}
-
-.code-content {
-    padding: 1.5rem;
-    overflow-x: auto;
-}
-
-pre {
-    margin: 0;
-    font-family: 'Courier New', monospace;
-    font-size: 0.95rem;
-    line-height: 1.6;
-}
-
-.line-number {
-    color: #858585;
-    margin-right: 1.5rem;
-    user-select: none;
-}
-
-/* Colores */
-.keyword { color: #569cd6; font-weight: bold; }
-.class-name { color: #4ec9b0; }
-.string { color: #ce9178; }
-.comment { color: #6a9955; font-style: italic; }
-.number { color: #b5cea8; }
-</style>
+<link rel="stylesheet" href="cuatrostyle.css">
 </head>
 
 <body>
 
-<header>
-    <h1>Código del Juego</h1>
-    <p>Cuatro en Raya - Java</p>
-</header>
+    <header>
+        <h1>Código del Juego</h1>
+        <p>Visualización del código fuente</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="#codigo">Código</a></li>
+            <li><a href="index.html#juegos">Juegos</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <a href="index.html" class="back-button">← Volver a Juegos</a>
+
+        <div class="code-container">
+    <div class="code-toolbar">
+        <span class="file-name">📄 Main.java</span>
+        
+    </div>
 
 <main>
 <div class="code-container">
 <div class="code-toolbar">📄 cuatro.java</div>
+
 
 <div class="code-content">
 <pre><code>
