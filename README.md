@@ -73,25 +73,9 @@ La documentación web sirve como complemento visual al proyecto, permitiendo una
 git clone [URL_DEL_REPOSITORIO]
 cd Equipo-3-MINIRETO
 ```
-
-2. **Compilar el proyecto con Maven:**
-```bash
-mvn clean compile
-```
-
-3. **Crear el archivo JAR ejecutable:**
-```bash
-mvn package
-```
-
-4. **Ejecutar el JAR generado:**
+2. **Ejecutar el JAR generado:**
 ```bash
 java -jar target/Juegos-1.0-SNAPSHOT.jar
-```
-
-O directamente desde Maven:
-```bash
-mvn exec:java
 ```
 
 ## 📁 Estructura del Proyecto
@@ -115,10 +99,11 @@ Equipo-3-MINIRETO/
 │   ├── cuatrostyle.css                                 # Estilos para página 4 en raya
 │   └── styles.css                                      # Estilos generales de la web
 ├── documentacion/
-│   └── [documentos del proyecto]
-├── pom.xml                                             # Configuración Maven
+│   └── [documentos del proyecto]                                       
 ├── README.md
 └── .gitignore
+
+(Generado por Claude 4.5 Sonnet)
 ```
 
 ## 🎮 Uso del Programa
@@ -222,21 +207,6 @@ Introduce una letra: a b
 - Ubicación: Torrelavega, Cantabria, ES
 - Contexto: Proyecto educativo - Primera evaluación
 - Integrantes: Iván Gómez, Daniel Zabala, Gleb Nesterov, Hugo Andrea
-
-## 📝 Roadmap
-
-### ✅ Completado
-- [x] Implementación del Ahorcado
-- [x] Implementación del Cuatro en Raya
-- [x] Sistema de menú principal
-- [x] Validación de entradas
-- [x] Documentación web
-- [x] Configuración Maven para JAR ejecutable
-- [x] Figura visual del ahorcado
-
-### 🔄 En Proceso
-- [ ] Corrección del bug de entrada múltiple
-- [ ] Implementación de juegos adicionales
 
 ## 🤝 Agradecimientos
 - Agradecemos al equipo de Cristian Platero por contribuciones y pequeñas discusiones acerca del código y del flujo de trabajo.
