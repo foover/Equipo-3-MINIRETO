@@ -77,35 +77,6 @@ cd Equipo-3-MINIRETO
 ```bash
 java -jar target/Juegos-1.0-SNAPSHOT.jar
 ```
-
-## 📁 Estructura del Proyecto
-
-```
-Equipo-3-MINIRETO/
-├── src/
-│   └── main/
-│       └── java/
-│           └── es/
-│               └── equipo3/
-│                   └── juegos/
-│                       ├── Main.java                   # Clase principal con menú
-│                       ├── Ahorcado.java               # Lógica del juego del ahorcado
-│                       └── Cuatro.java                 # Lógica del 4 en raya
-├── web/
-│   ├── index.html                                      # Página principal web
-│   ├── ahorcado.html                                   # Visualización de código Ahorcado
-│   ├── ahorcado.css                                    # Estilos para página Ahorcado
-│   ├── cuatro.html                                     # Visualización de código 4 en raya
-│   ├── cuatrostyle.css                                 # Estilos para página 4 en raya
-│   └── styles.css                                      # Estilos generales de la web
-├── documentacion/
-│   └── [documentos del proyecto]                                       
-├── README.md
-└── .gitignore
-
-(Generado por Claude 4.5 Sonnet)
-```
-
 ## 🎮 Uso del Programa
 
 Al ejecutar el programa, aparecerá un menú principal con las siguientes opciones:
