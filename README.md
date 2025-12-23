@@ -241,7 +241,7 @@ Introduce una letra: a b
 ## 🤝 Agradecimientos
 - Agradecemos al equipo de Cristian Platero por contribuciones y pequeñas discusiones acerca del código y del flujo de trabajo.
 - Agradecemos también a Ossel Santamaria por ayudarnos con la implementación de la figura al ahorcado.
-- Agradecemos a Sandra por ayudarnos a solucionar un problema que surgió por un conflicto con los Scanners del Ahorcado y de la clase Main.
+- Agradecemos a Sandra Alegría por ayudarnos a solucionar un problema que surgió por un conflicto con los Scanners del Ahorcado y de la clase Main.
 
 ---
 
