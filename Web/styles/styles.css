@@ -9,8 +9,8 @@
             line-height: 1.6;
             color: #e0e0e0;
             background: #1a1a1a;
-            background-image: url('src/4060492.jpg');
-            opacity: 100.00; 
+            background-image: url('../src/4060492.jpg');
+            opacity: 50.00; 
             background-size: cover;
         }
 
