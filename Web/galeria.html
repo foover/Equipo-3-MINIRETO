@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería - Ejecución del Proyecto</title>
+    <link rel="stylesheet" href="galeriastyles.css">
+</head>
+<body>
+    <header>
+        <h1>Galería de Ejecución</h1>
+        <p>Demostraciones del proyecto en diferentes sistemas</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="#videos">Galería</a></li>
+            <li><a href="index.html#juegos">Juegos</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <a href="index.html" class="back-button">← Volver a Juegos</a>
+
+        <section class="videos-section" id="videos">
+            <h2>Ejecución del Proyecto</h2>
+            <p class="intro-text">Aquí puedes ver cómo se ejecuta el archivo JAR del proyecto en diferentes sistemas operativos.</p>
+
+            <div class="videos-grid">
+                <div class="video-card">
+                    <div class="video-header">
+                        <div class="video-icon">🪟</div>
+                        <h3>Ejecución en Windows</h3>
+                    </div>
+                    <div class="video-content">
+                        <div class="video-wrapper">
+                            <video controls>
+                                <source src="videos/windows-demo.mp4" type="video/mp4">
+                                Tu navegador no soporta el elemento de video.
+                            </video>
+                        </div>
+                        <div class="video-details">
+                            <p><strong>Sistema:</strong> Windows 11</p>
+                            <p><strong>Java Version:</strong> JDK 24</p>
+                            <p><strong>Comando:</strong> <code>java -jar Juegos-1.0-SNAPSHOT.jar</code></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-header">
+                        <div class="video-icon">🐧</div>
+                        <h3>Ejecución en Ubuntu</h3>
+                    </div>
+                    <div class="video-content">
+                        <div class="video-wrapper">
+                            <video controls>
+                                <source src="videos/ubuntu-demo.mp4" type="video/mp4">
+                                Tu navegador no soporta el elemento de video.
+                            </video>
+                        </div>
+                        <div class="video-details">
+                            <p><strong>Sistema:</strong> Ubuntu 22.04 LTS</p>
+                            <p><strong>Java Version:</strong> OpenJDK 24</p>
+                            <p><strong>Comando:</strong> <code>java -jar Juegos-1.0-SNAPSHOT.jar</code></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="instructions-section">
+                <h3>Instrucciones de Ejecución</h3>
+                <div class="instructions-content">
+                    <div class="instruction-step">
+                        <span class="step-number">1</span>
+                        <div class="step-content">
+                            <h4>Compilar el proyecto</h4>
+                            <code>mvn clean package</code>
+                        </div>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">2</span>
+                        <div class="step-content">
+                            <h4>Navegar al directorio target</h4>
+                            <code>cd target</code>
+                        </div>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">3</span>
+                        <div class="step-content">
+                            <h4>Ejecutar el JAR</h4>
+                            <code>java -jar Juegos-1.0-SNAPSHOT.jar</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Equipo 3 - Colección de Juegos Clásicos</p>
+    </footer>
+</body>
+</html>
