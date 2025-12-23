@@ -1,0 +1,286 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #e0e0e0;
+    background: #1a1a1a;
+}
+
+header {
+    background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+    color: #e0e0e0;
+    padding: 2.5rem 0;
+    border-bottom: 2px solid #333;
+}
+
+header h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+}
+
+header p {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #999;
+}
+
+nav {
+    background: #252525;
+    padding: 1rem 0;
+    border-bottom: 1px solid #333;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    flex-wrap: wrap;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: #999;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    padding: 0.5rem 0;
+}
+
+nav a:hover {
+    color: #ffffff;
+}
+
+main {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+}
+
+.back-button {
+    display: inline-block;
+    background: #2c2c2c;
+    color: #ffffff;
+    padding: 0.8rem 2rem;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    border: 1px solid #444;
+    margin-bottom: 2rem;
+}
+
+.back-button:hover {
+    background: #333;
+    border-color: #555;
+}
+
+.videos-section h2 {
+    color: #ffffff;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.intro-text {
+    text-align: center;
+    color: #999;
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+}
+
+.videos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.video-card {
+    background: #252525;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+}
+
+.video-card:hover {
+    border-color: #444;
+    transform: translateY(-5px);
+}
+
+.video-header {
+    background: #2c2c2c;
+    padding: 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid #333;
+}
+
+.video-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.video-header h3 {
+    color: #ffffff;
+    font-size: 1.5rem;
+}
+
+.video-content {
+    padding: 1.5rem;
+}
+
+.video-wrapper {
+    width: 100%;
+    background: #1a1a1a;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    border: 1px solid #333;
+}
+
+.video-wrapper video {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.video-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.video-details p {
+    color: #bbb;
+    font-size: 0.95rem;
+}
+
+.video-details strong {
+    color: #ffffff;
+    margin-right: 0.5rem;
+}
+
+.video-details code {
+    background: #1a1a1a;
+    color: #ce9178;
+    padding: 0.3rem 0.6rem;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    border: 1px solid #333;
+}
+
+.instructions-section {
+    background: #252525;
+    padding: 2.5rem;
+    border-radius: 8px;
+    border: 1px solid #333;
+    margin-top: 3rem;
+}
+
+.instructions-section h3 {
+    color: #ffffff;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.instructions-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.instruction-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    background: #2c2c2c;
+    padding: 1.5rem;
+    border-radius: 4px;
+    border: 1px solid #333;
+}
+
+.step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: #3a3a3a;
+    color: #ffffff;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.step-content h4 {
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.step-content code {
+    display: block;
+    background: #1a1a1a;
+    color: #ce9178;
+    padding: 0.8rem 1rem;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    border: 1px solid #333;
+    margin-top: 0.5rem;
+}
+
+footer {
+    background: #1a1a1a;
+    color: #999;
+    padding: 2rem;
+    margin-top: 4rem;
+    border-top: 1px solid #333;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .videos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .instruction-step {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .intro-text {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .videos-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    main {
+        padding: 0 1rem;
+    }
+}
