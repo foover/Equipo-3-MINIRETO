@@ -1,0 +1,53 @@
+int opcion = 0;
+        boolean entradaValida = false;
+        
+        do{
+            Ejercicio_01.menu();
+            System.out.println("Introduce una opción (1-6): ");
+            
+            do{
+                if(teclado.hasNextInt()){
+                    opcion = teclado.nextInt();
+                    if(opcion >= 1 && opcion <= 6){
+                        entradaValida = true;
+                    }else{
+                        System.out.println("La entrada es un entero entre 1 y 6");
+                    }
+                }else{
+                    System.out.println("Error en el tipo de dato. debe ser numero entre 1 y 6");
+                    teclado.next();
+                }
+            }while(!entradaValida);
+            
+            
+        }while(opcion != 6);
+        
+        switch(opcion){
+            case 1 ->{
+                System.out.println("Este es elige la fila");
+                mostrarFila(matriz, teclado);
+            }
+        }
+        
+    }
+    /*
+        1.- Num fila por teclado y muestra elementos de esa fila, 
+        ademas comprobar que el numero de fila es valido.
+    
+        2.- Num columna por teclado y muestra elementos de esa columna, 
+        ademas
+    */
+    public static void menu(){
+            System.out.println("Menu de opciones");
+            System.out.println("Opción 1");
+            System.out.println("Opción 2");
+            System.out.println("Opción 3");
+            System.out.println("Opción 4");
+            System.out.println("Opción 5");
+            System.out.println("Opción 6");
+            
+        }
+    
+    public static void mostrarFila(int[][] matriz, Scanner teclado){
+        System.out.println("Pediremos");
+    }

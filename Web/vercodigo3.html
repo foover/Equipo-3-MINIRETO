@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Código - Ahorcado</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background: #1a1a1a;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            color: #e0e0e0;
+            padding: 2.5rem 0;
+            border-bottom: 2px solid #333;
+        }
+
+        header h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        header p {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #999;
+        }
+
+        nav {
+            background: #252525;
+            padding: 1rem 0;
+            border-bottom: 1px solid #333;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #999;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .code-header {
+            background: #252525;
+            padding: 2rem;
+            border-radius: 8px 8px 0 0;
+            border: 1px solid #333;
+            border-bottom: none;
+        }
+
+        .code-header h2 {
+            color: #ffffff;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .code-header p {
+            color: #999;
+        }
+
+        .code-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .tab {
+            background: #2c2c2c;
+            color: #999;
+            padding: 0.7rem 1.5rem;
+            border-radius: 4px 4px 0 0;
+            border: 1px solid #333;
+            border-bottom: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab:hover {
+            color: #ffffff;
+            background: #333;
+        }
+
+        .tab.active {
+            background: #1e1e1e;
+            color: #ffffff;
+            border-color: #444;
+        }
+
+        .code-container {
+            background: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 0 0 8px 8px;
+            overflow: hidden;
+        }
+
+        .code-toolbar {
+            background: #252525;
+            padding: 0.8rem 1.5rem;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .file-name {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .copy-button {
+            background: #2c2c2c;
+            color: #ffffff;
+            padding: 0.4rem 1rem;
+            border: 1px solid #444;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .copy-button:hover {
+            background: #333;
+            border-color: #555;
+        }
+
+        .code-content {
+            padding: 1.5rem;
+            overflow-x: auto;
+        }
+
+        pre {
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        code {
+            color: #e0e0e0;
+        }
+
+        /* Syntax highlighting para Java */
+        .keyword {
+            color: #569cd6;
+            font-weight: bold;
+        }
+
+        .class-name {
+            color: #4ec9b0;
+        }
+
+        .string {
+            color: #ce9178;
+        }
+
+        .comment {
+            color: #6a9955;
+            font-style: italic;
+        }
+
+        .method {
+            color: #dcdcaa;
+        }
+
+        .number {
+            color: #b5cea8;
+        }
+
+        .annotation {
+            color: #9cdcfe;
+        }
+
+        .line-number {
+            color: #858585;
+            margin-right: 1.5rem;
+            user-select: none;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: #2c2c2c;
+            color: #ffffff;
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border: 1px solid #444;
+            margin-bottom: 2rem;
+        }
+
+        .back-button:hover {
+            background: #333;
+            border-color: #555;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: #999;
+            padding: 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid #333;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .code-toolbar {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+
+            .code-tabs {
+                flex-wrap: wrap;
+            }
+
+            pre {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Código del Juego</h1>
+        <p>Visualización del código fuente</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="#codigo">Código</a></li>
+            <li><a href="index.html#juegos">Juegos</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <a href="index.html" class="back-button">← Volver a Juegos</a>
+
+        <div class="code-header">
+            <h2>🎯 Ahorcado</h2>
+            <p>Implementación del clásico juego del ahorcado en Java</p>
+            
+            <div class="code-tabs">
+                <div class="tab active">Main.java</div>
+                <div class="tab">Ahorcado.java</div>
+            </div>
+        </div>
+
+        <div class="code-container">
+            <div class="code-toolbar">
+                <span class="file-name">📄 Main.java</span>
+                <button class="copy-button">Copiar código</button>
+            </div>
+            
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%;"><span></span><span class="line-number">1</span><span style="color: #080; font-weight: bold">package</span><span style="color: #BBB"> </span><span style="color: #0E84B5; font-weight: bold">es.equipo3.ahorcado.test</span>;
+<span class="line-number">2</span>
+<span class="line-number">3</span><span style="color: #080; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #0E84B5; font-weight: bold">java.util.Random</span>;
+<span class="line-number">4</span><span style="color: #080; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #0E84B5; font-weight: bold">java.util.Scanner</span>;
+<span class="line-number">5</span>
+<span class="line-number">6</span><span style="color: #080; font-weight: bold">public</span><span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">class</span> <span style="color: #B06; font-weight: bold">MainTest</span><span style="color: #BBB"> </span>{
+<span class="line-number">7</span>
+<span class="line-number">8</span><span style="color: #BBB">    </span><span style="color: #080; font-weight: bold">private</span><span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">final</span><span style="color: #BBB"> </span>String<span style="color: #333">[]</span><span style="color: #BBB"> </span>palabras<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span>{<span style="color: #BBB"> </span><span style="color: #888">// Cambiar este array a otra clase para mayor limpieza</span>
+<span class="line-number">9</span><span style="color: #BBB">        </span><span style="background-color: #FFF0F0">"casa"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"perro"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"gato"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"mesa"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"silla"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"libro"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"lapiz"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"papel"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"flor"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"arbol"</span>,
+<span class="line-number">10</span><span style="color: #BBB">        </span><span style="background-color: #FFF0F0">"coche"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"rueda"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"puerta"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"ventana"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"techo"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"pared"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"suelo"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"camino"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"rio"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"mar"</span>,
+<span class="line-number">11</span><span style="color: #BBB">        </span><span style="background-color: #FFF0F0">"playa"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"arena"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"ola"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"nube"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"cielo"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"lluvia"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"viento"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"fuego"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"tierra"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"piedra"</span>,
+<span class="line-number">12</span><span style="color: #BBB">        </span><span style="background-color: #FFF0F0">"montana"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"valle"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"bosque"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"hoja"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"rama"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"tronco"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"raiz"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"semilla"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"fruto"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"campo"</span>,
+<span class="line-number">13</span><span style="color: #BBB">        </span><span style="background-color: #FFF0F0">"ciudad"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"pueblo"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"barrio"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"calle"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"plaza"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"puente"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"torre"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"castillo"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"iglesia"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"escuela"</span>,
+<span class="line-number">14</span><span style="color: #BBB">        </span><span style="background-color: #FFF0F0">"clase"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"alumno"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"profesor"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"examen"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"nota"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"libreta"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"mochila"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"ordenador"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"teclado"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"raton"</span>,
+<span class="line-number">15</span><span style="color: #BBB">        </span><span style="background-color: #FFF0F0">"pantalla"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"telefono"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"mensaje"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"correo"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"internet"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"codigo"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"programa"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"variable"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"bucle"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"condicion"</span>,
+<span class="line-number">16</span><span style="color: #BBB">        </span><span style="background-color: #FFF0F0">"funcion"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"clasejava"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"metodo"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"objeto"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"array"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"lista"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"numero"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"cadena"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"booleano"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"entero"</span>,
+<span class="line-number">17</span><span style="color: #BBB">        </span><span style="background-color: #FFF0F0">"decimal"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"suma"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"resta"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"producto"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"division"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"resultado"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"error"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"debug"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"compilar"</span>,<span style="color: #BBB"> </span><span style="background-color: #FFF0F0">"ejecutar"</span>
+<span class="line-number">18</span><span style="color: #BBB">    </span>};
+<span class="line-number">19</span>
+<span class="line-number">20</span><span style="color: #BBB">    </span><span style="color: #080; font-weight: bold">public</span><span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">void</span><span style="color: #BBB"> </span>jugarAhorcado()<span style="color: #BBB"> </span>{
+<span class="line-number">21</span><span style="color: #BBB">        </span>Scanner<span style="color: #BBB"> </span>in<span style="color: #BBB"> </span>=<span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">new</span><span style="color: #BBB"> </span>Scanner(System.in);
+<span class="line-number">22</span><span style="color: #BBB">        </span>Random<span style="color: #BBB"> </span>rand<span style="color: #BBB"> </span>=<span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">new</span><span style="color: #BBB"> </span>Random();
+<span class="line-number">23</span>
+<span class="line-number">24</span><span style="color: #BBB">        </span>String<span style="color: #BBB"> </span>palabraElegida<span style="color: #BBB"> </span>=<span style="color: #BBB"> </span>palabras[rand.nextInt(palabras.length)];
+<span class="line-number">25</span><span style="color: #BBB">        </span><span style="color: #080; font-weight: bold">char</span><span style="color: #BBB">[]</span><span style="color: #BBB"> </span>palabraActual<span style="color: #BBB"> </span>=<span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">new</span><span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">char</span>[palabraElegida.length()];
+<span class="line-number">26</span>
+<span class="line-number">27</span><span style="color: #BBB">        </span><span style="color: #080; font-weight: bold">for</span><span style="color: #BBB"> </span>(<span style="color: #080; font-weight: bold">int</span><span style="color: #BBB"> </span>i<span style="color: #BBB"> </span>=<span style="color: #BBB"> </span>0;<span style="color: #BBB"> </span>i<span style="color: #BBB"> </span>&lt;<span style="color: #BBB"> </span>palabraActual.length;<span style="color: #BBB"> </span>i++)<span style="color: #BBB"> </span>{
+<span class="line-number">28</span><span style="color: #BBB">            </span>palabraActual[i]<span style="color: #BBB"> </span>=<span style="color: #BBB"> </span>'_';
+<span class="line-number">29</span><span style="color: #BBB">        </span>}
+<span class="line-number">30</span>
+<span class="line-number">31</span><span style="color: #BBB">        </span><span style="color: #080; font-weight: bold">int</span><span style="color: #BBB"> </span>vidas<span style="color: #BBB"> </span>=<span style="color: #BBB"> </span>6;
+<span class="line-number">32</span><span style="color: #BBB">        </span><span style="color: #080; font-weight: bold">boolean</span><span style="color: #BBB"> </span>ganada<span style="color: #BBB"> </span>=<span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">false</span>;
+<span class="line-number">33</span>
+<span class="line-number">34</span><span style="color: #BBB">        </span><span style="color: #080; font-weight: bold">while</span><span style="color: #BBB"> </span>(vidas<span style="color: #BBB"> </span>&gt;<span style="color: #BBB"> </span>0<span style="color: #BBB"> </span>&amp;&amp;<span style="color: #BBB"> </span>!ganada)<span style="color: #BBB"> </span>{
+<span class="line-number">35</span>
+<span class="line-number">36</span><span style="color: #BBB">            </span>System.out.println("Palabra:");
+<span class="line-number">37</span><span style="color: #BBB">            </span><span style="color: #080; font-weight: bold">for</span><span style="color: #BBB"> </span>(<span style="color: #080; font-weight: bold">char</span><span style="color: #BBB"> </span>c<span style="color: #BBB"> </span>:<span style="color: #BBB"> </span>palabraActual)<span style="color: #BBB"> </span>{
+<span class="line-number">38</span><span style="color: #BBB">                </span>System.out.print(c<span style="color: #BBB"> </span>+<span style="color: #BBB"> </span>" ");
+<span class="line-number">39</span><span style="color: #BBB">            </span>}
+<span class="line-number">40</span><span style="color: #BBB">            </span>System.out.println();
+<span class="line-number">41</span>
+<span class="line-number">42</span><span style="color: #BBB">            </span>System.out.println("Vidas restantes: "<span style="color: #BBB"> </span>+<span style="color: #BBB"> </span>vidas);
+<span class="line-number">43</span><span style="color: #BBB">            </span>System.out.print("Introduce una letra: ");
+<span class="line-number">44</span><span style="color: #BBB">            </span><span style="color: #080; font-weight: bold">char</span><span style="color: #BBB"> </span>letra<span style="color: #BBB"> </span>=<span style="color: #BBB"> </span>in.next().charAt(0);
+<span class="line-number">45</span>
+<span class="line-number">46</span><span style="color: #BBB">            </span><span style="color: #080; font-weight: bold">boolean</span><span style="color: #BBB"> </span>acierto<span style="color: #BBB"> </span>=<span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">false</span>;
+<span class="line-number">47</span>
+<span class="line-number">48</span><span style="color: #BBB">            </span><span style="color: #080; font-weight: bold">for</span><span style="color: #BBB"> </span>(<span style="color: #080; font-weight: bold">int</span><span style="color: #BBB"> </span>i<span style="color: #BBB"> </span>=<span style="color: #BBB"> </span>0;<span style="color: #BBB"> </span>i<span style="color: #BBB"> </span>&lt;<span style="color: #BBB"> </span>palabraElegida.length();<span style="color: #BBB"> </span>i++)<span style="color: #BBB"> </span>{
+<span class="line-number">49</span><span style="color: #BBB">                </span><span style="color: #080; font-weight: bold">if</span><span style="color: #BBB"> </span>(palabraElegida.charAt(i)<span style="color: #BBB"> </span>==<span style="color: #BBB"> </span>letra)<span style="color: #BBB"> </span>{
+<span class="line-number">50</span><span style="color: #BBB">                    </span>palabraActual[i]<span style="color: #BBB"> </span>=<span style="color: #BBB"> </span>letra;
+<span class="line-number">51</span><span style="color: #BBB">                    </span>acierto<span style="color: #BBB"> </span>=<span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">true</span>;
+<span class="line-number">52</span><span style="color: #BBB">                </span>}
+<span class="line-number">53</span><span style="color: #BBB">            </span>}
+<span class="line-number">54</span>
+<span class="line-number">55</span><span style="color: #BBB">            </span><span style="color: #080; font-weight: bold">if</span><span style="color: #BBB"> </span>(!acierto)<span style="color: #BBB"> </span>{
+<span class="line-number">56</span><span style="color: #BBB">                </span>vidas--;
+<span class="line-number">57</span><span style="color: #BBB">                </span>System.out.println("Letra incorrecta.");
+<span class="line-number">58</span><span style="color: #BBB">            </span>}<span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">else</span><span style="color: #BBB"> </span>{
+<span class="line-number">59</span><span style="color: #BBB">                </span>System.out.println("¡Buen acierto!");
+<span class="line-number">60</span><span style="color: #BBB">            </span>}
+<span class="line-number">61</span>
+<span class="line-number">62</span><span style="color: #BBB">            </span>ganada<span style="color: #BBB"> </span>=<span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">true</span>;
+<span class="line-number">63</span><span style="color: #BBB">            </span><span style="color: #080; font-weight: bold">for</span><span style="color: #BBB"> </span>(<span style="color: #080; font-weight: bold">char</span><span style="color: #BBB"> </span>c<span style="color: #BBB"> </span>:<span style="color: #BBB"> </span>palabraActual)<span style="color: #BBB"> </span>{
+<span class="line-number">64</span><span style="color: #BBB">                </span><span style="color: #080; font-weight: bold">if</span><span style="color: #BBB"> </span>(c<span style="color: #BBB"> </span>==<span style="color: #BBB"> </span>'_')<span style="color: #BBB"> </span>{
+<span class="line-number">65</span><span style="color: #BBB">                    </span>ganada<span style="color: #BBB"> </span>=<span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">false</span>;
+<span class="line-number">66</span><span style="color: #BBB">                    </span><span style="color: #080; font-weight: bold">break</span>;
+<span class="line-number">67</span><span style="color: #BBB">                </span>}
+<span class="line-number">68</span><span style="color: #BBB">            </span>}
+<span class="line-number">69</span><span style="color: #BBB">        </span>}
+<span class="line-number">70</span>
+<span class="line-number">71</span><span style="color: #BBB">        </span><span style="color: #080; font-weight: bold">if</span><span style="color: #BBB"> </span>(ganada)<span style="color: #BBB"> </span>{
+<span class="line-number">72</span><span style="color: #BBB">            </span>System.out.println("¡Has ganado! La palabra era: "<span style="color: #BBB"> </span>+<span style="color: #BBB"> </span>palabraElegida);
+<span class="line-number">73</span><span style="color: #BBB">        </span>}<span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">else</span><span style="color: #BBB"> </span>{
+<span class="line-number">74</span><span style="color: #BBB">            </span>System.out.println("Has perdido. La palabra era: "<span style="color: #BBB"> </span>+<span style="color: #BBB"> </span>palabraElegida);
+<span class="line-number">75</span><span style="color: #BBB">        </span>}
+<span class="line-number">76</span>
+<span class="line-number">77</span><span style="color: #BBB">        </span>in.close();
+<span class="line-number">78</span><span style="color: #BBB">    </span>}
+<span class="line-number">79</span>
+<span class="line-number">80</span><span style="color: #BBB">    </span><span style="color: #080; font-weight: bold">public</span><span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">static</span><span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">void</span><span style="color: #BBB"> </span>main(String<span style="color: #BBB">[]</span><span style="color: #BBB"> </span>args)<span style="color: #BBB"> </span>{
+<span class="line-number">81</span><span style="color: #BBB">        </span>MainTest<span style="color: #BBB"> </span>juego<span style="color: #BBB"> </span>=<span style="color: #BBB"> </span><span style="color: #080; font-weight: bold">new</span><span style="color: #BBB"> </span>MainTest();
+<span class="line-number">82</span><span style="color: #BBB">        </span>juego.jugarAhorcado();
+<span class="line-number">83</span><span style="color: #BBB">    </span>}
+<span class="line-number">84</span>}
+
+</pre></div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Equipo 3 - Colección de Juegos Clásicos</p>
+    </footer>
+</body>
+</html>
